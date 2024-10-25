@@ -1,0 +1,22 @@
+.navigation-list__element {
+  padding: 2rem 10rem;
+  list-style: none;
+  font-size: 3rem;
+  margin: 0.5rem;
+  border: solid 0.1rem #929292;
+  border-radius: 0.7rem;
+}
+.navigation-list__element:active {
+  box-shadow: inset 0 0 0 3px #afadad;
+}
+
+/************* 
+Steps styles
+*******************/
+
+.navigation-elements {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
