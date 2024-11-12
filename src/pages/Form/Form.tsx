@@ -29,15 +29,15 @@ function Form({ navObj }: FormProps) {
 
   return (
     <div className="interface-screen">
-      <div>
+      <div className="form-step">
         {formStep}/{stepsNumber}
       </div>
       <div>
         <form className="details-form details-form__input">
           {/* First Page  */}
           <div className={formStep !== 1 ? "display-none" : ""}>
-            <div>
-              <label>Is Anyone Injured</label>
+            <div className="label-select__container">
+              <label className="dropdown-element">Is Anyone Injured</label>
               <select
                 value={isInjury}
                 onChange={(e) => setIsInjury(e.target.value)}
@@ -55,7 +55,7 @@ function Form({ navObj }: FormProps) {
                 </>
               )}
             </div>
-            <div>
+            <div className="label-select__container">
               <label>Is Any Witness</label>
               <select
                 value={isWitness}
@@ -71,7 +71,7 @@ function Form({ navObj }: FormProps) {
                 </>
               )}
             </div>
-            <div>
+            <div className="label-select__container">
               <label>Is Police attanded</label>
               <select
                 value={isPolice}

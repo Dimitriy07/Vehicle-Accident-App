@@ -10,6 +10,8 @@ import {
   handleBackToMain,
 } from "../../utils/navigationSteps";
 
+import "./steps.css";
+
 interface StepsProps {
   navObj: MainNavigationHandlers;
 }
