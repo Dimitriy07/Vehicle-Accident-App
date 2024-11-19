@@ -4,7 +4,7 @@ import { useState } from "react";
 import TpDetailsForm from "../TpDetailsForm/TpDetailsForm";
 import NavigationEl from "../../components/Navigation/Navigation";
 import PictureDetails from "../PictureDetails/PictureDetails";
-import Button from "../../components/Buttons/Button";
+import Button from "../../components/Button/Button";
 import {
   MainNavigationHandlers,
   handleBackToMain,

@@ -4,7 +4,7 @@ import {
   MainNavigationHandlers,
   handleBackToMain,
 } from "../../utils/navigationSteps";
-import Button from "../../components/Buttons/Button";
+import Button from "../../components/Button/Button";
 import NavigationEl from "../../components/Navigation/Navigation";
 
 interface FormProps {

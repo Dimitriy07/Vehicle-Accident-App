@@ -1,4 +1,4 @@
-import Button from "../../components/Buttons/Button";
+import Button from "../../components/Button/Button";
 import { NavigationHandlers, handleBack } from "../../utils/navigationSteps";
 interface PictureDetailsProps {
   navObj: NavigationHandlers;

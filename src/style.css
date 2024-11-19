@@ -25,14 +25,7 @@
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    height: 100vh;
-  }
-
-  .config-button__container {
-    display: flex;
-    justify-content: space-between;
-    gap: 20rem;
-    /* width: 50vh; */
+    height: 100%;
   }
 
   /**********************

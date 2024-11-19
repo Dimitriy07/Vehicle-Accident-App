@@ -1,0 +1,16 @@
+.inputSelectDriver {
+  width: 100%;
+  display: flex;
+  justify-content: stretch;
+}
+
+.inputSelectDriver label {
+  font-size: 2rem;
+  color: #6e6e6e;
+}
+
+.inputSelectDriver select {
+  width: 100%;
+  font-size: 2rem;
+  color: #6e6e6e;
+}

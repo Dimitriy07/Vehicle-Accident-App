@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import Button from "../../components/Buttons/Button";
+import Button from "../../components/Button/Button";
 import { NavigationHandlers, handleBack } from "../../utils/navigationSteps";
 
 interface TpDetailsFormProps {

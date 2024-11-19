@@ -17,7 +17,7 @@ function NavigationEl({
   color,
 }: Props) {
   return (
-    <li
+    <div
       style={{ backgroundColor: bgColor, color: color }}
       className={
         "navigation-list__element" + (taskCompletion ? " checked-steps" : "")
@@ -25,7 +25,7 @@ function NavigationEl({
       onClick={onClick}
     >
       {children}
-    </li>
+    </div>
   );
 }
 
