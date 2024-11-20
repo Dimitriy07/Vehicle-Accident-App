@@ -1,91 +1,104 @@
-import { useState } from "react";
+// import { useState } from "react";
 
-// import Button from "../Components/Buttons/Button";
-import TpDetailsForm from "../TpDetailsForm/TpDetailsForm";
-import NavigationEl from "../../components/Navigation/Navigation";
-import PictureDetails from "../PictureDetails/PictureDetails";
-import Button from "../../components/Button/Button";
-import {
-  MainNavigationHandlers,
-  handleBackToMain,
-} from "../../utils/navigationSteps";
+import { Outlet } from "react-router";
 
-import "./steps.css";
+// // import Button from "../Components/Buttons/Button";
+// import TpDetailsForm from "../TpDetailsForm/TpDetailsForm";
+// import NavigationEl from "../../components/Navigation/Navigation";
+// import PictureDetails from "../PictureDetails/PictureDetails";
+// import Button from "../../components/Button/Button";
+// import {
+//   MainNavigationHandlers,
+//   handleBackToMain,
+// } from "../../utils/navigationSteps";
 
-interface StepsProps {
-  navObj: MainNavigationHandlers;
-}
+// import "./steps.css";
 
-function Steps({ navObj }: StepsProps) {
-  const [pictureDetails, setPictureDetails] = useState(false);
-  const [tpDetailsForm, setTpDetailsForm] = useState(false);
-  const [managerDetails, setManagerDetails] = useState(false);
-  const [stepsScreen, setStepsScreen] = useState(true);
-  const [taskCompletionPicture, setTascCompletionPicture] = useState(false);
-  const [taskCompletionTpDetails, setTascCompletionTpDetails] = useState(false);
-  const [taskCompletionCallManager, setTascCompletionCallManager] =
-    useState(false);
+// interface StepsProps {
+//   navObj: MainNavigationHandlers;
+// }
 
-  function handleTpDetailsForm() {
-    setTpDetailsForm(true);
-    setStepsScreen(false);
-    setTascCompletionTpDetails(true);
-  }
+// function Steps({ navObj }: StepsProps) {
+//   const [pictureDetails, setPictureDetails] = useState(false);
+//   const [tpDetailsForm, setTpDetailsForm] = useState(false);
+//   const [managerDetails, setManagerDetails] = useState(false);
+//   const [stepsScreen, setStepsScreen] = useState(true);
+//   const [taskCompletionPicture, setTascCompletionPicture] = useState(false);
+//   const [taskCompletionTpDetails, setTascCompletionTpDetails] = useState(false);
+//   const [taskCompletionCallManager, setTascCompletionCallManager] =
+//     useState(false);
 
-  function handlePictureDetails() {
-    setPictureDetails(true);
-    setStepsScreen(false);
-    setTascCompletionPicture(true);
-  }
+//   function handleTpDetailsForm() {
+//     setTpDetailsForm(true);
+//     setStepsScreen(false);
+//     setTascCompletionTpDetails(true);
+//   }
 
-  function handleManagerDetails() {
-    setManagerDetails(!managerDetails);
-    setTascCompletionCallManager(true);
-  }
+//   function handlePictureDetails() {
+//     setPictureDetails(true);
+//     setStepsScreen(false);
+//     setTascCompletionPicture(true);
+//   }
 
-  const handleObj = {
-    setPictureDetails,
-    setTpDetailsForm,
-    setStepsScreen,
-  };
+//   function handleManagerDetails() {
+//     setManagerDetails(!managerDetails);
+//     setTascCompletionCallManager(true);
+//   }
 
-  function ManagerDetails() {
-    return <div className="interface-info">Immediately call fleet manager</div>;
-  }
+//   const handleObj = {
+//     setPictureDetails,
+//     setTpDetailsForm,
+//     setStepsScreen,
+//   };
 
+//   function ManagerDetails() {
+//     return <div className="interface-info">Immediately call fleet manager</div>;
+//   }
+
+//   return (
+//     <>
+//       {stepsScreen && (
+//         <div className="interface-screen">
+//           <div className="navigation-elements">
+//             <NavigationEl
+//               onClick={handlePictureDetails}
+//               taskCompletion={taskCompletionPicture}
+//             >
+//               Photos
+//             </NavigationEl>
+//             <NavigationEl
+//               onClick={handleTpDetailsForm}
+//               taskCompletion={taskCompletionTpDetails}
+//             >
+//               TP Details
+//             </NavigationEl>
+//             <span onClick={handleManagerDetails}>
+//               <NavigationEl taskCompletion={taskCompletionCallManager}>
+//                 Call Manager
+//               </NavigationEl>
+//             </span>
+//             {managerDetails && <ManagerDetails />}
+//           </div>
+//           <div className="btn-container">
+//             <Button onClick={() => handleBackToMain(navObj)}>Back</Button>
+//             <Button>Submit</Button>
+//           </div>
+//         </div>
+//       )}
+//       {tpDetailsForm && <TpDetailsForm navObj={handleObj} />}
+//       {pictureDetails && <PictureDetails navObj={handleObj} />}
+//     </>
+//   );
+// }
+
+// export default Steps;
+
+function Steps() {
   return (
-    <>
-      {stepsScreen && (
-        <div className="interface-screen">
-          <div className="navigation-elements">
-            <NavigationEl
-              onClick={handlePictureDetails}
-              taskCompletion={taskCompletionPicture}
-            >
-              Photos
-            </NavigationEl>
-            <NavigationEl
-              onClick={handleTpDetailsForm}
-              taskCompletion={taskCompletionTpDetails}
-            >
-              TP Details
-            </NavigationEl>
-            <span onClick={handleManagerDetails}>
-              <NavigationEl taskCompletion={taskCompletionCallManager}>
-                Call Manager
-              </NavigationEl>
-            </span>
-            {managerDetails && <ManagerDetails />}
-          </div>
-          <div className="btn-container">
-            <Button onClick={() => handleBackToMain(navObj)}>Back</Button>
-            <Button>Submit</Button>
-          </div>
-        </div>
-      )}
-      {tpDetailsForm && <TpDetailsForm navObj={handleObj} />}
-      {pictureDetails && <PictureDetails navObj={handleObj} />}
-    </>
+    <div>
+      <Outlet />
+      <h1>Steps Page</h1>
+    </div>
   );
 }
 

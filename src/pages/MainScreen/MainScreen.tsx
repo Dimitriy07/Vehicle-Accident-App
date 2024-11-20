@@ -1,43 +1,21 @@
-import { useState } from "react";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { useEffect, useState } from "react";
 
-import Steps from "../Steps/Steps";
-import Form from "../Form/Form";
-import NavigationEl from "../../components/Navigation/Navigation";
-import "../../style.css";
+import { Link } from "react-router-dom";
+import DriverSelection from "../../components/DriverSelection/DriverSelection";
+import ButtonContainer from "../../components/ButtonContainer/ButtonContainer";
+
+import styles from "./MainScreen.module.css";
 
 function MainScreen() {
-  const [steps, setSteps] = useState(false);
-  const [forms, setForms] = useState(false);
-  const [mainScreen, setMainScreen] = useState(true);
-
-  function handleSteps() {
-    setSteps(!steps);
-    setForms(false);
-    setMainScreen(false);
-  }
-
-  function handleForm() {
-    setForms(!forms);
-    setSteps(false);
-    setMainScreen(false);
-  }
-
-  const handleObj = {
-    setSteps,
-    setForms,
-    setMainScreen,
-  };
-
   return (
-    <div className="main-screen">
-      {mainScreen && (
-        <ul className="navigation-list">
-          <NavigationEl onClick={handleSteps}>Steps</NavigationEl>
-          <NavigationEl onClick={handleForm}>Form</NavigationEl>
-        </ul>
-      )}
-      {steps && <Steps navObj={handleObj} />}
-      {forms && <Form navObj={handleObj} />}
+    <div className={styles.containerStart}>
+      <DriverSelection>Driver:</DriverSelection>
+      <Link to="steps-nav" className="link-cta start">
+        Start Accident Form
+      </Link>
+
+      <ButtonContainer />
     </div>
   );
 }

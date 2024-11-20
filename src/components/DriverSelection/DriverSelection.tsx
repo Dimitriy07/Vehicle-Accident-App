@@ -1,19 +1,17 @@
 import styles from "./DriverSelection.module.css";
+
+import { useDriver } from "../../context/DriverContext";
 import { DriverType } from "../../types/driverType";
 
 interface DriverSelectionChildren {
   children: string;
-  drivers: DriverType[] | null;
-  onSetDriver: (driverName: number) => void;
 }
 
 function DriverSelection({
   children,
-  drivers,
-  onSetDriver,
 }: DriverSelectionChildren): JSX.Element | null {
-  if (drivers === null) return null;
-
+  const { drivers, onSetDriver } = useDriver();
+  if (!drivers) return null;
   return (
     <div className={styles.inputSelectDriver}>
       <label className="dropdown-element">{children}</label>
@@ -21,7 +19,7 @@ function DriverSelection({
         onChange={(e) => onSetDriver(Number(e.target.value))}
         className="dropdown-element"
       >
-        {drivers.map((user) => (
+        {drivers.map((user: DriverType) => (
           <option key={user.id} value={user.id}>
             {user.driverName}
           </option>
