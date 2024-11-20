@@ -166,6 +166,10 @@ Details Form styles
   color: #fff;
 }
 
+.checked{
+  background-color: #aef5d4;
+}
+
 .navigate {
   padding: 2rem 10rem;
   list-style: none;
