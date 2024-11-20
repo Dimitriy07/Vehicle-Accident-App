@@ -1,10 +1,10 @@
+import { useNavigate } from "react-router";
 import Button from "../../components/Button/Button";
-import { NavigationHandlers, handleBack } from "../../utils/navigationSteps";
-interface PictureDetailsProps {
-  navObj: NavigationHandlers;
-}
+import { useFormContext } from "../../context/FormContext";
 
-function PictureDetails({ navObj }: PictureDetailsProps) {
+function PictureDetails() {
+  const navigate = useNavigate();
+  const { setPhotoDetails } = useFormContext();
   return (
     <div className="photo-details interface-screen">
       <ul>
@@ -17,7 +17,15 @@ function PictureDetails({ navObj }: PictureDetailsProps) {
         <img src="/accident_photo.jpg" alt="Accident photo Example" />
       </div>
       <div className="btn-container">
-        <Button onClick={() => handleBack(navObj)}>Back</Button>
+        <Button onClick={() => navigate(-1)}>Back</Button>
+        <Button
+          onClick={() => {
+            setPhotoDetails(true);
+            navigate(-1);
+          }}
+        >
+          Done
+        </Button>
       </div>
     </div>
   );

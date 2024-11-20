@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import "./button.css"
+import styles from "./Button.module.css";
 
 interface Props {
   children?: string | ReactNode;
@@ -8,7 +8,7 @@ interface Props {
 
 function Button({ children, onClick }: Props) {
   return (
-    <button className="btn" onClick={onClick}>
+    <button className={styles.btn} onClick={onClick}>
       {children}
     </button>
   );
