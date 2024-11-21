@@ -9,6 +9,7 @@ import CallManager from "./components/CallManager/CallManager";
 
 import { DriverProvider } from "./context/DriverContext";
 import { FormProvider } from "./context/FormContext";
+import TpDetailsForm from "./pages/TpDetailsForm/TpDetailsForm";
 
 function App() {
   return (
@@ -23,10 +24,11 @@ function App() {
               <Route path="steps-nav/steps" element={<Steps />}>
                 <Route path="call-manager" element={<CallManager />} />
               </Route>
+              <Route path="steps-nav/steps/photos" element={<PhotoDetails />} />
               <Route
-                path="steps-nav/steps/photos"
-                element={<PhotoDetails />}
-              ></Route>
+                path="steps-nav/steps/tp-details"
+                element={<TpDetailsForm />}
+              />
             </Routes>
           </BrowserRouter>
         </FormProvider>

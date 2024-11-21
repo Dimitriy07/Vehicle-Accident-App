@@ -1,133 +1,167 @@
-import { useState } from "react";
+import { useNavigate } from "react-router";
 
 import Button from "../../components/Button/Button";
-import { NavigationHandlers, handleBack } from "../../utils/navigationSteps";
 
-interface TpDetailsFormProps {
-  navObj: NavigationHandlers;
-}
+import { useFormContext } from "../../context/FormContext";
+import FormInput from "../../components/FormInput/FormInput";
 
-function TpDetailsForm({ navObj }: TpDetailsFormProps) {
-  // State variables for form fields
-  const [isVehInvolved, setIsVehInvolved] = useState("yes");
-  const [isDriverOwner, setIsDriverOwner] = useState("yes");
+function TpDetailsForm() {
+  const navigate = useNavigate();
+  const {
+    setTpDetails,
+    isVehInvolved,
+    isTpDriverOwner,
+    tpRegNumber,
+    tpMake,
+    tpModel,
+    tpOwnerName,
+    tpOwnerTelephone,
+    tpOwnerAddress,
+    tpDriverName,
+    tpDriverTelephone,
+    tpDriverAddress,
+    tpInsuranceCompany,
+    tpPolicyNo,
+    setIsVehInvolved,
+    setTpIsDriverOwner,
+    setTpRegNumber,
+    setTpMake,
+    setTpModel,
+    setTpOwnerName,
+    setTpOwnerTelephone,
+    setTpOwnerAddress,
+    setTpDriverName,
+    setTpDriverTelephone,
+    setTpDriverAddress,
+    setTpInsuranceCompany,
+    setTpPolicyNo,
+  } = useFormContext();
 
-  const [regNumber, setRegNumber] = useState("");
-  const [make, setMake] = useState("");
-  const [model, setModel] = useState("");
+  // // State variables for form fields
+  // const [isVehInvolved, setIsVehInvolved] = useState("yes");
+  // const [isDriverOwner, setIsDriverOwner] = useState("yes");
 
-  const [ownerName, setOwnerName] = useState("");
-  const [ownerTelephone, setOwnerTelephone] = useState("");
-  const [ownerAddress, setOwnerAddress] = useState("");
+  // const [regNumber, setRegNumber] = useState("");
+  // const [make, setMake] = useState("");
+  // const [model, setModel] = useState("");
 
-  const [driverName, setDriverName] = useState("");
-  const [driverTelephone, setDriverTelephone] = useState("");
-  const [driverAddress, setDriverAddress] = useState("");
+  // const [ownerName, setOwnerName] = useState("");
+  // const [ownerTelephone, setOwnerTelephone] = useState("");
+  // const [ownerAddress, setOwnerAddress] = useState("");
 
-  const [insuranceCompany, setInsuranceCompany] = useState("");
-  const [policyNo, setPolicyNo] = useState("");
+  // const [driverName, setDriverName] = useState("");
+  // const [driverTelephone, setDriverTelephone] = useState("");
+  // const [driverAddress, setDriverAddress] = useState("");
+
+  // const [insuranceCompany, setInsuranceCompany] = useState("");
+  // const [policyNo, setPolicyNo] = useState("");
 
   return (
     <div className="interface-screen">
       <form className="details-form navigation-elements">
-        <label>Is vehicle involved</label>
-        <select
+        <FormInput
+          type="select"
+          label="Is Vehicle Involved"
           value={isVehInvolved}
-          onChange={(e) => setIsVehInvolved(e.target.value)}
-        >
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
-        </select>
+          onChangeSet={setIsVehInvolved}
+          options={["yes", "no"]}
+        />
 
         {isVehInvolved === "yes" && (
           <div className="details-form__input">
-            <input
-              type="text"
+            <FormInput
+              type="input-text"
               placeholder="Reg N"
-              value={regNumber}
-              onChange={(e) => setRegNumber(e.target.value)}
+              value={tpRegNumber}
+              onChangeSet={setTpRegNumber}
             />
-            <input
-              type="text"
+
+            <FormInput
+              type="input-text"
               placeholder="Make"
-              value={make}
-              onChange={(e) => setMake(e.target.value)}
+              value={tpMake}
+              onChangeSet={setTpMake}
             />
-            <input
-              type="text"
+            <FormInput
+              type="input-text"
               placeholder="Model"
-              value={model}
-              onChange={(e) => setModel(e.target.value)}
+              value={tpModel}
+              onChangeSet={setTpModel}
+            />
+            <FormInput
+              type="select"
+              label="Is Driver owner of the vehicle"
+              value={isTpDriverOwner}
+              onChangeSet={setTpIsDriverOwner}
+              options={["yes", "no"]}
             />
 
-            <label>Is Driver owner of the vehicle</label>
-            <select
-              value={isDriverOwner}
-              onChange={(e) => setIsDriverOwner(e.target.value)}
-            >
-              <option value="yes">Yes</option>
-              <option value="no">No</option>
-            </select>
-
-            {isDriverOwner !== "yes" && (
+            {isTpDriverOwner !== "yes" && (
               <div>
-                <input
-                  type="text"
+                <FormInput
+                  type="input-text"
                   placeholder="Owner's Name"
-                  value={ownerName}
-                  onChange={(e) => setOwnerName(e.target.value)}
+                  value={tpOwnerName}
+                  onChangeSet={setTpOwnerName}
                 />
-                <input
-                  type="text"
+                <FormInput
+                  type="input-text"
                   placeholder="Owner's Telephone"
-                  value={ownerTelephone}
-                  onChange={(e) => setOwnerTelephone(e.target.value)}
+                  value={tpOwnerTelephone}
+                  onChangeSet={setTpOwnerTelephone}
                 />
-                <input
-                  type="text"
+                <FormInput
+                  type="input-text"
                   placeholder="Owner's Address"
-                  value={ownerAddress}
-                  onChange={(e) => setOwnerAddress(e.target.value)}
+                  value={tpOwnerAddress}
+                  onChangeSet={setTpOwnerAddress}
                 />
               </div>
             )}
 
-            <input
-              type="text"
+            <FormInput
+              type="input-text"
               placeholder="Driver's Name"
-              value={driverName}
-              onChange={(e) => setDriverName(e.target.value)}
+              value={tpDriverName}
+              onChangeSet={setTpDriverName}
             />
-            <input
-              type="text"
+            <FormInput
+              type="input-text"
               placeholder="Driver's Telephone"
-              value={driverTelephone}
-              onChange={(e) => setDriverTelephone(e.target.value)}
+              value={tpDriverTelephone}
+              onChangeSet={setTpDriverTelephone}
             />
-            <input
-              type="text"
+            <FormInput
+              type="input-text"
               placeholder="Driver's Address"
-              value={driverAddress}
-              onChange={(e) => setDriverAddress(e.target.value)}
+              value={tpDriverAddress}
+              onChangeSet={setTpDriverAddress}
             />
-            <input
-              type="text"
+            <FormInput
+              type="input-text"
               placeholder="Insurance Company"
-              value={insuranceCompany}
-              onChange={(e) => setInsuranceCompany(e.target.value)}
+              value={tpInsuranceCompany}
+              onChangeSet={setTpInsuranceCompany}
             />
-            <input
-              type="text"
+            <FormInput
+              type="input-text"
               placeholder="Policy No"
-              value={policyNo}
-              onChange={(e) => setPolicyNo(e.target.value)}
+              value={tpPolicyNo}
+              onChangeSet={setTpPolicyNo}
             />
           </div>
         )}
       </form>
       <div className="btn-container">
-        <Button onClick={() => handleBack(navObj)}>Back</Button>
-        <Button>Submit</Button>
+        <Button onClick={() => navigate(-1)}>Back</Button>
+        <Button
+          onClick={() => {
+            setTpDetails(true);
+            navigate(-1);
+          }}
+        >
+          Submit
+        </Button>
       </div>
     </div>
   );

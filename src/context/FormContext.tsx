@@ -1,42 +1,106 @@
-import { createContext, useContext, useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { createContext, useContext, useState, PropsWithChildren } from "react";
 
 interface FormContextValue {
-  photoDetails: boolean;
-  tpDetails: any;
-  callManager: boolean;
+  photoDetailsDone: boolean;
+  tpDetailsDone: any;
+  callManagerDone: boolean;
+  isVehInvolved: string;
+  isTpDriverOwner: string;
+  tpRegNumber: string;
+  tpMake: string;
+  tpModel: string;
+  tpOwnerName: string;
+  tpOwnerTelephone: string;
+  tpOwnerAddress: string;
+  tpDriverName: string;
+  tpDriverTelephone: string;
+  tpDriverAddress: string;
+  tpInsuranceCompany: string;
+  tpPolicyNo: string;
+
   setPhotoDetails: (value: boolean) => void;
+  setTpDetails: (value: boolean) => void;
+  setCallManager: (value: boolean) => void;
+  setIsVehInvolved: (value: string) => void;
+  setTpIsDriverOwner: (value: string) => void;
+  setTpRegNumber: (value: string) => void;
+  setTpMake: (value: string) => void;
+  setTpModel: (value: string) => void;
+  setTpOwnerName: (value: string) => void;
+  setTpOwnerTelephone: (value: string) => void;
+  setTpOwnerAddress: (value: string) => void;
+  setTpDriverName: (value: string) => void;
+  setTpDriverTelephone: (value: string) => void;
+  setTpDriverAddress: (value: string) => void;
+  setTpInsuranceCompany: (value: string) => void;
+  setTpPolicyNo: (value: string) => void;
 }
 
-const FormContext = createContext<FormContextValue | null>(null);
+const FormContext = createContext<Partial<FormContextValue> | null>(null);
 
-function FormProvider({ children }: any) {
+function FormProvider({ children }: PropsWithChildren) {
   ////// Steps state
-  const [photoDetails, setPhotoDetails] = useState<boolean>(false);
-  const [tpDetails, setTpDetails] = useState(null);
-  const [callManager, setCallManager] = useState<boolean>(false);
+  const [photoDetailsDone, setPhotoDetails] = useState<boolean>(false);
+  const [tpDetailsDone, setTpDetails] = useState<boolean>(false);
+  const [callManagerDone, setCallManager] = useState<boolean>(false);
 
   ////// TP Details info
   const [isVehInvolved, setIsVehInvolved] = useState("yes");
-  const [isDriverOwner, setIsDriverOwner] = useState("yes");
+  const [isTpDriverOwner, setTpIsDriverOwner] = useState("yes");
 
-  const [regNumber, setRegNumber] = useState("");
-  const [make, setMake] = useState("");
-  const [model, setModel] = useState("");
+  const [tpRegNumber, setTpRegNumber] = useState("");
+  const [tpMake, setTpMake] = useState("");
+  const [tpModel, setTpModel] = useState("");
 
-  const [ownerName, setOwnerName] = useState("");
-  const [ownerTelephone, setOwnerTelephone] = useState("");
-  const [ownerAddress, setOwnerAddress] = useState("");
+  const [tpOwnerName, setTpOwnerName] = useState("");
+  const [tpOwnerTelephone, setTpOwnerTelephone] = useState("");
+  const [tpOwnerAddress, setTpOwnerAddress] = useState("");
 
-  const [driverName, setDriverName] = useState("");
-  const [driverTelephone, setDriverTelephone] = useState("");
-  const [driverAddress, setDriverAddress] = useState("");
+  const [tpDriverName, setTpDriverName] = useState("");
+  const [tpDriverTelephone, setTpDriverTelephone] = useState("");
+  const [tpDriverAddress, setTpDriverAddress] = useState("");
 
-  const [insuranceCompany, setInsuranceCompany] = useState("");
-  const [policyNo, setPolicyNo] = useState("");
+  const [tpInsuranceCompany, setTpInsuranceCompany] = useState("");
+  const [tpPolicyNo, setTpPolicyNo] = useState("");
 
   return (
     <FormContext.Provider
-      value={{ photoDetails, tpDetails, callManager, setPhotoDetails }}
+      value={{
+        photoDetailsDone,
+        tpDetailsDone,
+        callManagerDone,
+        setPhotoDetails,
+        setTpDetails,
+        setCallManager,
+        isVehInvolved,
+        isTpDriverOwner,
+        tpRegNumber,
+        tpMake,
+        tpModel,
+        tpOwnerName,
+        tpOwnerTelephone,
+        tpOwnerAddress,
+        tpDriverName,
+        tpDriverTelephone,
+        tpDriverAddress,
+        tpInsuranceCompany,
+        tpPolicyNo,
+        setIsVehInvolved,
+        setTpIsDriverOwner,
+        setTpRegNumber,
+        setTpMake,
+        setTpModel,
+        setTpOwnerName,
+        setTpOwnerTelephone,
+        setTpOwnerAddress,
+        setTpDriverName,
+        setTpDriverTelephone,
+        setTpDriverAddress,
+        setTpInsuranceCompany,
+        setTpPolicyNo,
+      }}
     >
       {children}
     </FormContext.Provider>
@@ -47,6 +111,6 @@ function useFormContext() {
   if (!context) {
     throw new Error("useFormContext must be used within a FormProvider");
   }
-  return context;
+  return context as FormContextValue;
 }
 export { useFormContext, FormProvider };

@@ -5,7 +5,7 @@ import { useFormContext } from "../../context/FormContext";
 
 function Steps() {
   const navigate = useNavigate();
-  const { photoDetails } = useFormContext();
+  const { photoDetailsDone, tpDetailsDone, callManagerDone } = useFormContext();
 
   return (
     <div className="container-display">
@@ -14,7 +14,7 @@ function Steps() {
           <Link
             to="photos"
             className={`${"link-cta navigate"} ${
-              photoDetails ? "checked" : ""
+              photoDetailsDone ? "checked" : ""
             }`}
           >
             Photos
@@ -24,7 +24,7 @@ function Steps() {
           <Link
             to="tp-details"
             className={`${"link-cta navigate"} ${
-              photoDetails ? "checked" : ""
+              tpDetailsDone ? "checked" : ""
             }`}
           >
             TP Details
@@ -34,7 +34,7 @@ function Steps() {
           <Link
             to="call-manager"
             className={`${"link-cta navigate"} ${
-              photoDetails ? "checked" : ""
+              callManagerDone ? "checked" : ""
             }`}
           >
             Call Manager
