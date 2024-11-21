@@ -46,7 +46,9 @@ function Steps() {
       </ul>
 
       <div className="btn-container">
-        <Button onClick={() => navigate(-1)}>Back</Button>
+        <Button onClick={() => navigate("/steps-nav", { replace: true })}>
+          Back
+        </Button>
         <Button>Submit</Button>
       </div>
     </div>

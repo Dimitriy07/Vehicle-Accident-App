@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router";
+
 import Button from "../../components/Button/Button";
+
 import { useFormContext } from "../../context/FormContext";
 
 function PictureDetails() {
@@ -17,11 +19,13 @@ function PictureDetails() {
         <img src="/accident_photo.jpg" alt="Accident photo Example" />
       </div>
       <div className="btn-container">
-        <Button onClick={() => navigate(-1)}>Back</Button>
+        <Button onClick={() => navigate("/steps-nav/steps", { replace: true })}>
+          Back
+        </Button>
         <Button
           onClick={() => {
             setPhotoDetails(true);
-            navigate(-1);
+            navigate("/steps-nav/steps", { replace: true });
           }}
         >
           Done
