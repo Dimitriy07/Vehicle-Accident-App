@@ -1,6 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { createContext, useContext, useState, PropsWithChildren } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  PropsWithChildren,
+  useRef,
+} from "react";
 
 interface FormContextValue {
   photoDetailsDone: boolean;
@@ -19,6 +25,7 @@ interface FormContextValue {
   tpDriverAddress: string;
   tpInsuranceCompany: string;
   tpPolicyNo: string;
+  tpRef: React.RefObject<HTMLFormElement>;
 
   setPhotoDetails: (value: boolean) => void;
   setTpDetails: (value: boolean) => void;
@@ -65,6 +72,9 @@ function FormProvider({ children }: PropsWithChildren) {
   const [tpInsuranceCompany, setTpInsuranceCompany] = useState("");
   const [tpPolicyNo, setTpPolicyNo] = useState("");
 
+  ////////// Reference to Tp data
+  const tpRef = useRef<HTMLFormElement>(null);
+
   return (
     <FormContext.Provider
       value={{
@@ -87,6 +97,7 @@ function FormProvider({ children }: PropsWithChildren) {
         tpDriverAddress,
         tpInsuranceCompany,
         tpPolicyNo,
+        tpRef,
         setIsVehInvolved,
         setTpIsDriverOwner,
         setTpRegNumber,

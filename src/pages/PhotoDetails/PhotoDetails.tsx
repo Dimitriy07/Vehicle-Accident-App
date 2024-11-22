@@ -4,11 +4,13 @@ import Button from "../../components/Button/Button";
 
 import { useFormContext } from "../../context/FormContext";
 
+import styles from "./PhotoDetails.module.css";
+
 function PictureDetails() {
   const navigate = useNavigate();
   const { setPhotoDetails } = useFormContext();
   return (
-    <div className="photo-details interface-screen">
+    <div className={`${styles.photoDetails} container-input__form`}>
       <ul>
         <li>Take Photos from all the angles(at least 15)</li>
         <li>Take Photos inside the vehicle (how many passangers inside)</li>

@@ -3,7 +3,7 @@ import styles from "./Button.module.css";
 
 interface Props {
   children?: string | ReactNode;
-  onClick?: () => void;
+  onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 function Button({ children, onClick }: Props) {

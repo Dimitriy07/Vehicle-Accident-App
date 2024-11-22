@@ -6,6 +6,7 @@ import FormInput from "../../components/FormInput/FormInput";
 import { useFormContext } from "../../context/FormContext";
 
 import styles from "./TpDetailsForm.module.css";
+import { useEffect } from "react";
 
 function TpDetailsForm() {
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ function TpDetailsForm() {
     tpDriverAddress,
     tpInsuranceCompany,
     tpPolicyNo,
+    tpRef,
     setIsVehInvolved,
     setTpIsDriverOwner,
     setTpRegNumber,
@@ -39,9 +41,23 @@ function TpDetailsForm() {
     setTpPolicyNo,
   } = useFormContext();
 
+  useEffect(() => {
+    console.log("TpDetailsForm rendered");
+    console.log("tpRef.current:", tpRef.current);
+  }, []);
+
   return (
     <div className="container-input__form">
-      <form className={styles.form}>
+      <form className={styles.form} ref={tpRef}>
+        {/* Hidden information to send email */}
+
+        <FormInput type="hidden" value="Test" inputName="from_name" />
+        <FormInput
+          type="hidden"
+          value="Testdsfadfsafdsafds"
+          inputName="from_message"
+        />
+
         <FormInput
           type="select"
           label="Is Vehicle Involved"
@@ -169,6 +185,7 @@ function TpDetailsForm() {
         </Button>
         <Button
           onClick={() => {
+            console.log(tpRef);
             setTpDetails(true);
             navigate("/steps-nav/steps", { replace: true });
           }}
