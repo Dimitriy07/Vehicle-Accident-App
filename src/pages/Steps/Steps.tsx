@@ -5,17 +5,27 @@ import Button from "../../components/Button/Button";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { useFormContext } from "../../context/FormContext";
 
+import { createHtmlFromData } from "../../utils/createHtmlForm";
+
 function Steps() {
   const navigate = useNavigate();
-  const { photoDetailsDone, tpDetailsDone, callManagerDone, tpRef } =
+  const { photoDetailsDone, tpDetailsDone, callManagerDone, tpFormData } =
     useFormContext();
+
+  // Create a new form element from FormData to HTML Form Data
+
+  const recreatedForm = createHtmlFromData(tpFormData);
 
   const sendEmail = (e?: React.FormEvent<HTMLFormElement>) => {
     e?.preventDefault();
-    if (tpRef?.current) {
+    const emailServiceId = import.meta.env.VITE_EMAIL_SERVICE_ID;
+    const emailTemplateId = import.meta.env.VITE_EMAIL_TEMPLATE_ID;
+    const emailPublicKey = import.meta.env.VITE_EMAIL_PUBLIC_KEY;
+
+    if (tpFormData) {
       emailjs
-        .sendForm("service_0lc19w7", "template_uvnqxha", tpRef.current, {
-          publicKey: "Ylao2JI4sGhuYLxwK_",
+        .sendForm(emailServiceId, emailTemplateId, recreatedForm, {
+          publicKey: emailPublicKey,
         })
         .then(
           () => {

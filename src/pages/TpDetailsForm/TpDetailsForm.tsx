@@ -6,7 +6,6 @@ import FormInput from "../../components/FormInput/FormInput";
 import { useFormContext } from "../../context/FormContext";
 
 import styles from "./TpDetailsForm.module.css";
-import { useEffect } from "react";
 
 function TpDetailsForm() {
   const navigate = useNavigate();
@@ -39,25 +38,39 @@ function TpDetailsForm() {
     setTpDriverAddress,
     setTpInsuranceCompany,
     setTpPolicyNo,
+    setTpFormData,
   } = useFormContext();
 
-  useEffect(() => {
-    console.log("TpDetailsForm rendered");
-    console.log("tpRef.current:", tpRef.current);
-  }, []);
+  function handleSaveForm() {
+    if (tpRef.current) {
+      const formData = new FormData(tpRef.current);
+      setTpFormData(formData);
+    }
+  }
+
+  const message = `TP information (preliminary email)
+  Vehicle Information
+  RegN: ${tpRegNumber}
+  Make: ${tpMake}
+  Model: ${tpModel}
+  Owner:${tpOwnerName}
+  Driver Name${tpDriverName}
+  Driver Phone: ${tpDriverTelephone}
+  Driver Address: ${tpDriverAddress}
+  `;
 
   return (
     <div className="container-input__form">
       <form className={styles.form} ref={tpRef}>
         {/* Hidden information to send email */}
-
-        <FormInput type="hidden" value="Test" inputName="from_name" />
+        to_email
         <FormInput
           type="hidden"
-          value="Testdsfadfsafdsafds"
-          inputName="from_message"
+          value={import.meta.env.VITE_EMAIL_TO}
+          inputName="to_email"
         />
-
+        <FormInput type="hidden" value="Test" inputName="from_name" />
+        <FormInput type="hidden" value={message} inputName="from_message" />
         <FormInput
           type="select"
           label="Is Vehicle Involved"
@@ -65,7 +78,6 @@ function TpDetailsForm() {
           onChangeSet={setIsVehInvolved}
           options={["yes", "no"]}
         />
-
         {isVehInvolved === "yes" ? (
           <>
             <fieldset>
@@ -185,7 +197,7 @@ function TpDetailsForm() {
         </Button>
         <Button
           onClick={() => {
-            console.log(tpRef);
+            handleSaveForm();
             setTpDetails(true);
             navigate("/steps-nav/steps", { replace: true });
           }}

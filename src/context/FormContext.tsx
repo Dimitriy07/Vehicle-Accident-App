@@ -26,6 +26,7 @@ interface FormContextValue {
   tpInsuranceCompany: string;
   tpPolicyNo: string;
   tpRef: React.RefObject<HTMLFormElement>;
+  tpFormData: FormData | null;
 
   setPhotoDetails: (value: boolean) => void;
   setTpDetails: (value: boolean) => void;
@@ -43,6 +44,7 @@ interface FormContextValue {
   setTpDriverAddress: (value: string) => void;
   setTpInsuranceCompany: (value: string) => void;
   setTpPolicyNo: (value: string) => void;
+  setTpFormData: (value: FormData) => void;
 }
 
 const FormContext = createContext<Partial<FormContextValue> | null>(null);
@@ -74,6 +76,7 @@ function FormProvider({ children }: PropsWithChildren) {
 
   ////////// Reference to Tp data
   const tpRef = useRef<HTMLFormElement>(null);
+  const [tpFormData, setTpFormData] = useState<FormData | null>(null);
 
   return (
     <FormContext.Provider
@@ -98,6 +101,7 @@ function FormProvider({ children }: PropsWithChildren) {
         tpInsuranceCompany,
         tpPolicyNo,
         tpRef,
+        tpFormData,
         setIsVehInvolved,
         setTpIsDriverOwner,
         setTpRegNumber,
@@ -111,6 +115,7 @@ function FormProvider({ children }: PropsWithChildren) {
         setTpDriverAddress,
         setTpInsuranceCompany,
         setTpPolicyNo,
+        setTpFormData,
       }}
     >
       {children}
