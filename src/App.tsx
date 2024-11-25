@@ -10,12 +10,15 @@ import CallManager from "./components/CallManager/CallManager";
 import { DriverProvider } from "./context/DriverContext";
 import { FormProvider } from "./context/FormContext";
 import TpDetailsForm from "./pages/TpDetailsForm/TpDetailsForm";
+import Form from "./pages/Form/Form";
+import Header from "./components/Header/Header";
 
 function App() {
   return (
-    <div>
+    <div className="app">
       <DriverProvider>
         <FormProvider>
+          <Header />
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<MainScreen />} />
@@ -29,6 +32,7 @@ function App() {
                 path="steps-nav/steps/tp-details"
                 element={<TpDetailsForm />}
               />
+              <Route path="steps-nav/form" element={<Form />} />
             </Routes>
           </BrowserRouter>
         </FormProvider>

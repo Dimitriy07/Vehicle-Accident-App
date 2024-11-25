@@ -63,7 +63,7 @@ function TpDetailsForm() {
     <div className="container-input__form">
       <form className={styles.form} ref={tpRef}>
         {/* Hidden information to send email */}
-        to_email
+
         <FormInput
           type="hidden"
           value={import.meta.env.VITE_EMAIL_TO}

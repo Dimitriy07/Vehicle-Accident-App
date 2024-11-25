@@ -1,6 +1,17 @@
 /************* 
 Picture Details styles
 *******************/
+.containerDisplayPhoto {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 .photoDetails li {
   font-size: 2.5rem;
   margin: 1rem;
@@ -12,6 +23,7 @@ Picture Details styles
   text-align: center;
 }
 .photoDetails img {
-  width: 100%;
+  margin: 0 20px 0 30px;
+  width: 80%;
   height: auto;
 }

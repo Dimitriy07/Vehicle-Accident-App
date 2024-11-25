@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import emailjs from "@emailjs/browser";
 
 import Button from "../../components/Button/Button";
@@ -6,14 +7,24 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import { useFormContext } from "../../context/FormContext";
 
 import { createHtmlFromData } from "../../utils/createHtmlForm";
+import { useEffect } from "react";
 
 function Steps() {
   const navigate = useNavigate();
-  const { photoDetailsDone, tpDetailsDone, callManagerDone, tpFormData } =
-    useFormContext();
+  const {
+    photoDetailsDone,
+    tpDetailsDone,
+    callManagerDone,
+    tpFormData,
+    setSteps,
+    setStepsDone,
+  } = useFormContext();
+
+  useEffect(() => {
+    setSteps(true);
+  }, [setSteps]);
 
   // Create a new form element from FormData to HTML Form Data
-
   const recreatedForm = createHtmlFromData(tpFormData);
 
   const sendEmail = (e?: React.FormEvent<HTMLFormElement>) => {
@@ -82,7 +93,8 @@ function Steps() {
         </Button>
         <Button
           onClick={() => {
-            sendEmail();
+            // sendEmail();
+            setStepsDone(true);
             navigate("/steps-nav", { replace: true });
           }}
         >

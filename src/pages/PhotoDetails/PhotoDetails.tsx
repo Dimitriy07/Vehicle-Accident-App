@@ -10,7 +10,7 @@ function PictureDetails() {
   const navigate = useNavigate();
   const { setPhotoDetails } = useFormContext();
   return (
-    <div className={`${styles.photoDetails} container-input__form`}>
+    <div className={`${styles.photoDetails} ${styles.containerDisplayPhoto}`}>
       <ul>
         <li>Take Photos from all the angles(at least 15)</li>
         <li>Take Photos inside the vehicle (how many passangers inside)</li>
