@@ -38,6 +38,20 @@ interface FormContextValue {
   isInjury: string;
   STEPS_NUMBERS: number;
   driverForm: boolean;
+  policeName: string;
+  policeStattion: string;
+  policeRefN: string;
+  accidentDate: Date;
+  accidentTime: Date;
+  accidentLocation: string;
+  weatherCondition: string;
+  roadCondition: string;
+  driverSpeed: number;
+  tpSpeed: number;
+  driverDamageDetails: string;
+  tpDamageDetails: string;
+  driverStatement: string;
+  driverSignature: HTMLImageElement | null;
 
   setStartAccident: (value: boolean) => void;
   setPhotoDetails: (value: boolean) => void;
@@ -66,6 +80,20 @@ interface FormContextValue {
   setIsPolice: (value: string) => void;
   setIsInjury: (value: string) => void;
   setDriverForm: (value: boolean) => void;
+  setPoliceName: (value: string) => void;
+  setPoliceStattion: (value: string) => void;
+  setPoliceRefN: (value: string) => void;
+  setAccidentDate: (value: Date) => void;
+  setAccidentTime: (value: Date) => void;
+  setAccidentLocation: (value: string) => void;
+  setWeatherCondition: (value: string) => void;
+  setRoadCondition: (value: string) => void;
+  setDriverSpeed: (value: number) => void;
+  setTpSpeed: (value: number) => void;
+  setDriverDamageDetails: (value: string) => void;
+  setTpDamageDetails: (value: string) => void;
+  setDriverStatement: (value: string) => void;
+  setDriverSignature: (value: HTMLImageElement | null) => void;
 }
 
 const FormContext = createContext<Partial<FormContextValue> | null>(null);
@@ -106,6 +134,21 @@ function FormProvider({ children }: PropsWithChildren) {
   const [witnessName, setWitnessName] = useState("");
   const [witnessAddress, setWitnessAddress] = useState("");
   const [isPolice, setIsPolice] = useState("no");
+  const [policeName, setPoliceName] = useState("");
+  const [policeStattion, setPoliceStattion] = useState("");
+  const [policeRefN, setPoliceRefN] = useState("");
+  const [accidentDate, setAccidentDate] = useState<Date>(new Date());
+  const [accidentTime, setAccidentTime] = useState<Date>(new Date());
+  const [accidentLocation, setAccidentLocation] = useState("");
+  const [weatherCondition, setWeatherCondition] = useState("");
+  const [roadCondition, setRoadCondition] = useState("");
+  const [driverSpeed, setDriverSpeed] = useState(0);
+  const [tpSpeed, setTpSpeed] = useState(0);
+  const [driverDamageDetails, setDriverDamageDetails] = useState("");
+  const [tpDamageDetails, setTpDamageDetails] = useState("");
+  const [driverStatement, setDriverStatement] = useState("");
+  const [driverSignature, setDriverSignature] =
+    useState<HTMLImageElement | null>(null);
 
   ////////// Reference to Tp data
   const tpRef = useRef<HTMLFormElement>(null);
@@ -150,6 +193,20 @@ function FormProvider({ children }: PropsWithChildren) {
         isInjury,
         STEPS_NUMBERS,
         driverForm,
+        policeName,
+        policeStattion,
+        policeRefN,
+        accidentDate,
+        accidentTime,
+        accidentLocation,
+        weatherCondition,
+        roadCondition,
+        driverSpeed,
+        tpSpeed,
+        driverDamageDetails,
+        tpDamageDetails,
+        driverStatement,
+        driverSignature,
         setStartAccident,
         setIsVehInvolved,
         setTpIsDriverOwner,
@@ -172,6 +229,20 @@ function FormProvider({ children }: PropsWithChildren) {
         setIsPolice,
         setIsInjury,
         setDriverForm,
+        setPoliceName,
+        setPoliceStattion,
+        setPoliceRefN,
+        setAccidentDate,
+        setAccidentTime,
+        setAccidentLocation,
+        setWeatherCondition,
+        setRoadCondition,
+        setDriverSpeed,
+        setTpSpeed,
+        setDriverDamageDetails,
+        setTpDamageDetails,
+        setDriverStatement,
+        setDriverSignature,
       }}
     >
       {children}

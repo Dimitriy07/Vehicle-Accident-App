@@ -2,8 +2,8 @@ import styles from "./FormInput.module.css";
 
 interface FormInputProps {
   type: string;
-  value: string;
-  onChangeSet?: (e: string) => void;
+  value: string | Date;
+  onChangeSet?: (value: string) => void;
   placeholder?: string;
   label?: string;
   options?: string[];
@@ -19,13 +19,15 @@ function FormInput({
   options,
   inputName,
 }: FormInputProps) {
+  const stringValue = value instanceof Date ? value.toISOString() : value;
+
   if (type === "select") {
     return (
       <>
         <label className={styles.label}>{label}</label>
         <select
           className={styles.select}
-          value={value}
+          value={stringValue}
           onChange={(e) => onChangeSet && onChangeSet(e.target.value)}
           name={inputName}
         >
@@ -45,13 +47,43 @@ function FormInput({
         className={styles.input}
         type="text"
         placeholder={placeholder}
-        value={value}
+        value={stringValue}
         onChange={(e) => onChangeSet && onChangeSet(e.target.value)}
       />
     );
   }
+  if (type === "input-date") {
+    return (
+      <>
+        <label className={styles.label}>{label}</label>
+        <input
+          name={inputName}
+          className={styles.input}
+          type="date"
+          placeholder={placeholder}
+          value={stringValue.split("T")[0]}
+          onChange={(e) => onChangeSet && onChangeSet(e.target.value)}
+        />
+      </>
+    );
+  }
+  if (type === "input-time") {
+    return (
+      <>
+        <label className={styles.label}>{label}</label>
+        <input
+          name={inputName}
+          className={styles.input}
+          type="time"
+          placeholder={placeholder}
+          value={stringValue.split("T")[1]}
+          onChange={(e) => onChangeSet && onChangeSet(e.target.value)}
+        />
+      </>
+    );
+  }
   if (type === "hidden") {
-    return <input name={inputName} type="hidden" value={value} />;
+    return <input name={inputName} type="hidden" value={stringValue} />;
   }
   return null;
 }

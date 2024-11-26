@@ -9,15 +9,29 @@ import styles from "./Form.module.css";
 
 function Form() {
   const {
+    STEPS_NUMBERS,
     stepsDone,
-    driverForm,
     formStep,
     isWitness,
     witnessName,
     witnessAddress,
-    isPolice,
     isInjury,
-    STEPS_NUMBERS,
+    isPolice,
+    policeName,
+    policeStattion,
+    policeRefN,
+    accidentDate,
+    accidentTime,
+    accidentLocation,
+    weatherCondition,
+    roadCondition,
+    driverSpeed,
+    tpSpeed,
+    driverDamageDetails,
+    tpDamageDetails,
+    driverStatement,
+    driverSignature,
+
     setFormStep,
     setIsWitness,
     setWitnessName,
@@ -25,6 +39,20 @@ function Form() {
     setIsPolice,
     setIsInjury,
     setDriverForm,
+    setPoliceName,
+    setPoliceStattion,
+    setPoliceRefN,
+    setAccidentDate,
+    setAccidentTime,
+    setAccidentLocation,
+    setWeatherCondition,
+    setRoadCondition,
+    setDriverSpeed,
+    setTpSpeed,
+    setDriverDamageDetails,
+    setTpDamageDetails,
+    setDriverStatement,
+    setDriverSignature,
   } = useFormContext();
 
   const navigate = useNavigate();
@@ -104,17 +132,23 @@ function Form() {
 
               {isPolice === "yes" && (
                 <>
-                  <input
-                    type="text"
-                    placeholder="Number and Input of Officer"
+                  <FormInput
+                    type="input-text"
+                    placeholder="Number and Name of the Officer"
+                    value={policeName}
+                    onChangeSet={setPoliceName}
                   />
-                  <input
-                    type="text"
+                  <FormInput
+                    type="input-text"
                     placeholder="Station of Attending Officer"
+                    value={policeStattion}
+                    onChangeSet={setPoliceStattion}
                   />
-                  <input
-                    type="text"
+                  <FormInput
+                    type="input-text"
                     placeholder="Police reference No (if applicable)"
+                    value={policeRefN}
+                    onChangeSet={setPoliceRefN}
                   />
                 </>
               )}
@@ -129,6 +163,12 @@ function Form() {
             <fieldset>
               <legend>Date and Time of Accident</legend>
 
+              <FormInput
+                type="input-date"
+                placeholder="Date"
+                value={accidentDate}
+                onChangeSet={setAccidentDate}
+              />
               <input type="text" placeholder="Date" />
               <input type="text" placeholder="Time" />
               <input type="text" placeholder="Location" />
