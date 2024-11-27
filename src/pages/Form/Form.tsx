@@ -73,10 +73,11 @@ function Form() {
     setFormStep(() => formStep - 1);
   }
 
+  // Change stepsDone = true condition in <form></form> and button while developing (change back for production)
   return (
     <div className="container-input__form">
       <div>
-        <form className={`${styles.form} ${!stepsDone ? "display-none" : ""}`}>
+        <form className={`${styles.form} ${stepsDone ? "display-none" : ""}`}>
           {/* First Page  */}
           <div
             className={`${styles.form} ${formStep !== 1 ? "display-none" : ""}`}
@@ -167,32 +168,58 @@ function Form() {
                 type="input-date"
                 placeholder="Date"
                 value={accidentDate}
-                onChangeSet={setAccidentDate}
+                onChangeSetDate={setAccidentDate}
               />
-              <input type="text" placeholder="Date" />
-              <input type="text" placeholder="Time" />
-              <input type="text" placeholder="Location" />
+              <FormInput
+                type="input-time"
+                placeholder="Time"
+                value={accidentTime}
+                onChangeSet={setAccidentTime}
+              />
+              <FormInput
+                type="input-text"
+                placeholder="Location"
+                value={accidentLocation}
+                onChangeSet={setAccidentLocation}
+              />
             </fieldset>
             <fieldset>
               <legend>Weather and Road Condition</legend>
-              <label>Weather Condition</label>
-              <select>
-                <option value="clear">Clear</option>
-                <option value="cloudy">Cloudy</option>
-                <option value="foggy">Foggy</option>
-                <option value="raining">Raining</option>
-                <option value="snow">Snow</option>
-                <option value="sunny">Sunny</option>
-                <option value="wet">Wet</option>
-              </select>
-              <label>Road Condition</label>
-              <select>
-                <option value="good">Good</option>
-                <option value="average">Average</option>
-                <option value="poor">Poor</option>
-              </select>
-              <input type="text" placeholder="Your speed" />
-              <input type="text" placeholder="Third party speed" />
+              <FormInput
+                type="select"
+                label="Weather Condition"
+                value={weatherCondition}
+                onChangeSet={setWeatherCondition}
+                options={[
+                  "clear",
+                  "cloudy",
+                  "foggy",
+                  "raining",
+                  "snow",
+                  "sunny",
+                  "wet",
+                ]}
+              />
+              <FormInput
+                type="select"
+                label="Road Condition"
+                value={roadCondition}
+                onChangeSet={setRoadCondition}
+                options={["good", "average", "poor"]}
+              />
+
+              <FormInput
+                type="input-text"
+                placeholder="Your speed"
+                value={driverSpeed}
+                onChangeSet={setDriverSpeed}
+              />
+              <FormInput
+                type="input-text"
+                placeholder="Third party speed"
+                value={tpSpeed}
+                onChangeSet={setTpSpeed}
+              />
             </fieldset>
           </div>
 
@@ -202,12 +229,24 @@ function Form() {
             className={`${formStep !== 3 ? "display-none" : ""} ${styles.form}`}
           >
             <div>
-              <label>Details of damage (Your vehicle)</label>
-              <textarea rows={5} cols={50}></textarea>
+              <FormInput
+                type="textarea"
+                rows={5}
+                cols={30}
+                label="Details of damage (Your vehicle)"
+                value={driverDamageDetails}
+                onChangeSet={setDriverDamageDetails}
+              />
             </div>
             <div>
-              <label>Details of damage (Your third party vehicle)</label>
-              <textarea rows={5} cols={50}></textarea>
+              <FormInput
+                type="textarea"
+                rows={5}
+                cols={30}
+                label="Details of damage (Your third party vehicle)"
+                value={tpDamageDetails}
+                onChangeSet={setTpDamageDetails}
+              />
             </div>
           </div>
           {/* Forth Page  */}
@@ -216,10 +255,16 @@ function Form() {
             className={`${formStep !== 4 ? "display-none" : ""} ${styles.form}`}
           >
             <div>
-              <label>
-                Driver's Statement(Please explain fully and clearly what
-                happened)
-              </label>
+              <FormInput
+                type="textarea"
+                rows={10}
+                cols={50}
+                label=" Driver's Statement(Please explain fully and clearly what
+                happened)"
+                value={driverStatement}
+                onChangeSet={setDriverStatement}
+              />
+
               <textarea rows={10} cols={50}></textarea>
             </div>
           </div>
@@ -249,7 +294,7 @@ function Form() {
         >
           Back
         </Button>
-        {!stepsDone ? (
+        {stepsDone ? (
           <div></div>
         ) : (
           <Button onClick={() => formStep < STEPS_NUMBERS && handleNext()}>

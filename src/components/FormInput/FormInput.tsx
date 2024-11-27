@@ -4,20 +4,26 @@ interface FormInputProps {
   type: string;
   value: string | Date;
   onChangeSet?: (value: string) => void;
+  onChangeSetDate?: (value: Date) => void;
   placeholder?: string;
   label?: string;
   options?: string[];
   inputName?: string;
+  rows?: number;
+  cols?: number;
 }
 
 function FormInput({
   type,
   value,
   onChangeSet,
+  onChangeSetDate,
   placeholder,
   label,
   options,
   inputName,
+  rows,
+  cols,
 }: FormInputProps) {
   const stringValue = value instanceof Date ? value.toISOString() : value;
 
@@ -62,7 +68,9 @@ function FormInput({
           type="date"
           placeholder={placeholder}
           value={stringValue.split("T")[0]}
-          onChange={(e) => onChangeSet && onChangeSet(e.target.value)}
+          onChange={(e) =>
+            onChangeSetDate && onChangeSetDate(new Date(e.target.value))
+          }
         />
       </>
     );
@@ -76,9 +84,22 @@ function FormInput({
           className={styles.input}
           type="time"
           placeholder={placeholder}
-          value={stringValue.split("T")[1]}
+          value={stringValue}
           onChange={(e) => onChangeSet && onChangeSet(e.target.value)}
         />
+      </>
+    );
+  }
+  if (type === "textarea") {
+    return (
+      <>
+        <label className={styles.label}>{label}</label>
+        <textarea
+          rows={rows}
+          cols={cols}
+          value={stringValue}
+          onChange={(e) => onChangeSet && onChangeSet(e.target.value)}
+        ></textarea>
       </>
     );
   }
