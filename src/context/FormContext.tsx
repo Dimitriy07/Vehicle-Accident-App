@@ -51,7 +51,7 @@ interface FormContextValue {
   driverDamageDetails: string;
   tpDamageDetails: string;
   driverStatement: string;
-  driverSignature: HTMLImageElement | null;
+  driverSignature: string;
 
   setStartAccident: (value: boolean) => void;
   setPhotoDetails: (value: boolean) => void;
@@ -93,7 +93,7 @@ interface FormContextValue {
   setDriverDamageDetails: (value: string) => void;
   setTpDamageDetails: (value: string) => void;
   setDriverStatement: (value: string) => void;
-  setDriverSignature: (value: HTMLImageElement | null) => void;
+  setDriverSignature: (value: string) => void;
 }
 
 const FormContext = createContext<Partial<FormContextValue> | null>(null);
@@ -147,8 +147,7 @@ function FormProvider({ children }: PropsWithChildren) {
   const [driverDamageDetails, setDriverDamageDetails] = useState("");
   const [tpDamageDetails, setTpDamageDetails] = useState("");
   const [driverStatement, setDriverStatement] = useState("");
-  const [driverSignature, setDriverSignature] =
-    useState<HTMLImageElement | null>(null);
+  const [driverSignature, setDriverSignature] = useState("");
 
   ////////// Reference to Tp data
   const tpRef = useRef<HTMLFormElement>(null);

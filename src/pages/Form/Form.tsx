@@ -1,8 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router";
-import Button from "../../components/Button/Button";
 import { useFormContext } from "../../context/FormContext";
-import { useEffect } from "react";
+
+import SignatureCanvas from "react-signature-canvas";
+import CanvasDraw from "react-canvas-draw";
+
+import Button from "../../components/Button/Button";
 import FormInput from "../../components/FormInput/FormInput";
 
 import styles from "./Form.module.css";
@@ -65,12 +69,26 @@ function Form() {
     [setDriverForm]
   );
 
+  const signatureRef = useRef<SignatureCanvas>(null);
+  const driverVehCanvas = useRef<CanvasDraw>(null);
+
   function handleNext(): void {
     setFormStep(() => formStep + 1);
   }
 
   function handleBack(): void {
     setFormStep(() => formStep - 1);
+  }
+
+  function handleClearSignature(e: React.MouseEvent<HTMLButtonElement>): void {
+    e.preventDefault();
+    signatureRef.current?.clear();
+  }
+
+  function handleSaveSignature(): void {
+    const signatureUrl = signatureRef.current?.toDataURL();
+    if (signatureUrl === undefined) return;
+    setDriverSignature(signatureUrl);
   }
 
   // Change stepsDone = true condition in <form></form> and button while developing (change back for production)
@@ -228,26 +246,37 @@ function Form() {
           <div
             className={`${formStep !== 3 ? "display-none" : ""} ${styles.form}`}
           >
-            <div>
-              <FormInput
-                type="textarea"
-                rows={5}
-                cols={30}
-                label="Details of damage (Your vehicle)"
-                value={driverDamageDetails}
-                onChangeSet={setDriverDamageDetails}
-              />
-            </div>
-            <div>
-              <FormInput
-                type="textarea"
-                rows={5}
-                cols={30}
-                label="Details of damage (Your third party vehicle)"
-                value={tpDamageDetails}
-                onChangeSet={setTpDamageDetails}
-              />
-            </div>
+            <FormInput
+              type="textarea"
+              rows={5}
+              cols={30}
+              label="Details of damage (Your vehicle)"
+              value={driverDamageDetails}
+              onChangeSet={setDriverDamageDetails}
+            />
+            <CanvasDraw
+              ref={driverVehCanvas}
+              canvasWidth={300} // Ensure it's a valid number
+              canvasHeight={200} // Ensure it's a valid number
+              brushColor="#000"
+              brushRadius={2}
+              lazyRadius={1}
+              hideInterface={false}
+              style={{
+                border: "1px solid #ccc",
+                borderRadius: "8px",
+                width: "300px",
+              }}
+            />
+
+            <FormInput
+              type="textarea"
+              rows={5}
+              cols={30}
+              label="Details of damage (Third party vehicle)"
+              value={tpDamageDetails}
+              onChangeSet={setTpDamageDetails}
+            />
           </div>
           {/* Forth Page  */}
 
@@ -264,8 +293,6 @@ function Form() {
                 value={driverStatement}
                 onChangeSet={setDriverStatement}
               />
-
-              <textarea rows={10} cols={50}></textarea>
             </div>
           </div>
 
@@ -274,10 +301,17 @@ function Form() {
           <div
             className={`${formStep !== 5 ? "display-none" : ""} ${styles.form}`}
           >
-            <div>
-              <label>Signature</label>
-              <textarea rows={10} cols={50}></textarea>
-            </div>
+            <label>Signature</label>
+            <SignatureCanvas
+              ref={signatureRef}
+              canvasProps={{
+                width: 300,
+                height: 200,
+                style: { border: "1px solid #000" },
+              }}
+              clearOnResize={false}
+            />
+            <button onClick={handleClearSignature}>Clear</button>
           </div>
           {/* ////////////////////////// */}
         </form>

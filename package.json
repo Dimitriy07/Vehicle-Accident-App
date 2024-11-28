@@ -12,11 +12,16 @@
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
+    "@types/react-canvas-draw": "^1.2.4",
+    "@types/react-signature-canvas": "^1.0.6",
+    "dotenv": "^16.4.5",
     "json-server": "^1.0.0-beta.3",
     "react": "^18.3.1",
+    "react-canvas-draw": "^1.2.1",
     "react-dom": "^18.3.1",
     "react-router": "^6.28.0",
     "react-router-dom": "^6.28.0",
+    "react-signature-canvas": "^1.0.6",
     "ts-node": "^10.9.2"
   },
   "devDependencies": {
