@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router";
@@ -97,222 +98,222 @@ function Form() {
       <div>
         <form className={`${styles.form} ${stepsDone ? "display-none" : ""}`}>
           {/* First Page  */}
-          <div
-            className={`${styles.form} ${formStep !== 1 ? "display-none" : ""}`}
-          >
-            <fieldset>
-              <legend>Injury/Witness/Police Details</legend>
+          {formStep === 1 && (
+            <div className={`${styles.form}`}>
+              <fieldset>
+                <legend>Injury/Witness/Police Details</legend>
 
-              <FormInput
-                type="select"
-                label="Is Anyone Injured"
-                value={isInjury}
-                onChangeSet={setIsInjury}
-                options={["no", "yes"]}
-              />
+                <FormInput
+                  type="select"
+                  label="Is Anyone Injured"
+                  value={isInjury}
+                  onChangeSet={setIsInjury}
+                  options={["no", "yes"]}
+                />
 
-              {isInjury === "yes" && (
-                <>
-                  <label>Details of infury</label>
-                  <textarea rows={5} cols={50}></textarea>
-                </>
-              )}
-              <FormInput
-                type="select"
-                label="Is Any Witness"
-                value={isWitness}
-                onChangeSet={setIsWitness}
-                options={["no", "yes"]}
-              />
+                {isInjury === "yes" && (
+                  <>
+                    <label>Details of infury</label>
+                    <textarea rows={5} cols={50}></textarea>
+                  </>
+                )}
+                <FormInput
+                  type="select"
+                  label="Is Any Witness"
+                  value={isWitness}
+                  onChangeSet={setIsWitness}
+                  options={["no", "yes"]}
+                />
 
-              {isWitness === "yes" && (
-                <>
-                  <FormInput
-                    type="input-text"
-                    placeholder="Witness Name"
-                    value={witnessName}
-                    onChangeSet={setWitnessName}
-                  />
-                  <FormInput
-                    type="input-text"
-                    placeholder="Witness Address"
-                    value={witnessAddress}
-                    onChangeSet={setWitnessAddress}
-                  />
-                </>
-              )}
-              <FormInput
-                type="select"
-                label="Is Police attanded"
-                value={isPolice}
-                onChangeSet={setIsPolice}
-                options={["no", "yes"]}
-              />
+                {isWitness === "yes" && (
+                  <>
+                    <FormInput
+                      type="input-text"
+                      placeholder="Witness Name"
+                      value={witnessName}
+                      onChangeSet={setWitnessName}
+                    />
+                    <FormInput
+                      type="input-text"
+                      placeholder="Witness Address"
+                      value={witnessAddress}
+                      onChangeSet={setWitnessAddress}
+                    />
+                  </>
+                )}
+                <FormInput
+                  type="select"
+                  label="Is Police attanded"
+                  value={isPolice}
+                  onChangeSet={setIsPolice}
+                  options={["no", "yes"]}
+                />
 
-              {isPolice === "yes" && (
-                <>
-                  <FormInput
-                    type="input-text"
-                    placeholder="Number and Name of the Officer"
-                    value={policeName}
-                    onChangeSet={setPoliceName}
-                  />
-                  <FormInput
-                    type="input-text"
-                    placeholder="Station of Attending Officer"
-                    value={policeStattion}
-                    onChangeSet={setPoliceStattion}
-                  />
-                  <FormInput
-                    type="input-text"
-                    placeholder="Police reference No (if applicable)"
-                    value={policeRefN}
-                    onChangeSet={setPoliceRefN}
-                  />
-                </>
-              )}
-            </fieldset>
-          </div>
+                {isPolice === "yes" && (
+                  <>
+                    <FormInput
+                      type="input-text"
+                      placeholder="Number and Name of the Officer"
+                      value={policeName}
+                      onChangeSet={setPoliceName}
+                    />
+                    <FormInput
+                      type="input-text"
+                      placeholder="Station of Attending Officer"
+                      value={policeStattion}
+                      onChangeSet={setPoliceStattion}
+                    />
+                    <FormInput
+                      type="input-text"
+                      placeholder="Police reference No (if applicable)"
+                      value={policeRefN}
+                      onChangeSet={setPoliceRefN}
+                    />
+                  </>
+                )}
+              </fieldset>
+            </div>
+          )}
 
           {/* Second Page  */}
 
-          <div
-            className={`${formStep !== 2 ? "display-none" : ""} ${styles.form}`}
-          >
-            <fieldset>
-              <legend>Date and Time of Accident</legend>
+          {formStep === 2 && (
+            <div className={`${styles.form}`}>
+              <fieldset>
+                <legend>Date and Time of Accident</legend>
 
-              <FormInput
-                type="input-date"
-                placeholder="Date"
-                value={accidentDate}
-                onChangeSetDate={setAccidentDate}
-              />
-              <FormInput
-                type="input-time"
-                placeholder="Time"
-                value={accidentTime}
-                onChangeSet={setAccidentTime}
-              />
-              <FormInput
-                type="input-text"
-                placeholder="Location"
-                value={accidentLocation}
-                onChangeSet={setAccidentLocation}
-              />
-            </fieldset>
-            <fieldset>
-              <legend>Weather and Road Condition</legend>
-              <FormInput
-                type="select"
-                label="Weather Condition"
-                value={weatherCondition}
-                onChangeSet={setWeatherCondition}
-                options={[
-                  "clear",
-                  "cloudy",
-                  "foggy",
-                  "raining",
-                  "snow",
-                  "sunny",
-                  "wet",
-                ]}
-              />
-              <FormInput
-                type="select"
-                label="Road Condition"
-                value={roadCondition}
-                onChangeSet={setRoadCondition}
-                options={["good", "average", "poor"]}
-              />
+                <FormInput
+                  type="input-date"
+                  placeholder="Date"
+                  value={accidentDate}
+                  onChangeSetDate={setAccidentDate}
+                />
+                <FormInput
+                  type="input-time"
+                  placeholder="Time"
+                  value={accidentTime}
+                  onChangeSet={setAccidentTime}
+                />
+                <FormInput
+                  type="input-text"
+                  placeholder="Location"
+                  value={accidentLocation}
+                  onChangeSet={setAccidentLocation}
+                />
+              </fieldset>
+              <fieldset>
+                <legend>Weather and Road Condition</legend>
+                <FormInput
+                  type="select"
+                  label="Weather Condition"
+                  value={weatherCondition}
+                  onChangeSet={setWeatherCondition}
+                  options={[
+                    "clear",
+                    "cloudy",
+                    "foggy",
+                    "raining",
+                    "snow",
+                    "sunny",
+                    "wet",
+                  ]}
+                />
+                <FormInput
+                  type="select"
+                  label="Road Condition"
+                  value={roadCondition}
+                  onChangeSet={setRoadCondition}
+                  options={["good", "average", "poor"]}
+                />
 
-              <FormInput
-                type="input-text"
-                placeholder="Your speed"
-                value={driverSpeed}
-                onChangeSet={setDriverSpeed}
-              />
-              <FormInput
-                type="input-text"
-                placeholder="Third party speed"
-                value={tpSpeed}
-                onChangeSet={setTpSpeed}
-              />
-            </fieldset>
-          </div>
+                <FormInput
+                  type="input-text"
+                  placeholder="Your speed"
+                  value={driverSpeed}
+                  onChangeSet={setDriverSpeed}
+                />
+                <FormInput
+                  type="input-text"
+                  placeholder="Third party speed"
+                  value={tpSpeed}
+                  onChangeSet={setTpSpeed}
+                />
+              </fieldset>
+            </div>
+          )}
 
           {/* Third Page  */}
-
-          <div
-            className={`${formStep !== 3 ? "display-none" : ""} ${styles.form}`}
-          >
-            <FormInput
-              type="textarea"
-              rows={5}
-              cols={30}
-              label="Details of damage (Your vehicle)"
-              value={driverDamageDetails}
-              onChangeSet={setDriverDamageDetails}
-            />
-            <CanvasDraw
-              ref={driverVehCanvas}
-              canvasWidth={300} // Ensure it's a valid number
-              canvasHeight={200} // Ensure it's a valid number
-              brushColor="#000"
-              brushRadius={2}
-              lazyRadius={1}
-              hideInterface={false}
-              style={{
-                border: "1px solid #ccc",
-                borderRadius: "8px",
-                width: "300px",
-              }}
-            />
-
-            <FormInput
-              type="textarea"
-              rows={5}
-              cols={30}
-              label="Details of damage (Third party vehicle)"
-              value={tpDamageDetails}
-              onChangeSet={setTpDamageDetails}
-            />
-          </div>
-          {/* Forth Page  */}
-
-          <div
-            className={`${formStep !== 4 ? "display-none" : ""} ${styles.form}`}
-          >
-            <div>
+          {formStep === 3 && (
+            <div className={`${styles.form}`}>
               <FormInput
                 type="textarea"
-                rows={10}
-                cols={50}
-                label=" Driver's Statement(Please explain fully and clearly what
-                happened)"
-                value={driverStatement}
-                onChangeSet={setDriverStatement}
+                rows={5}
+                cols={30}
+                label="Details of damage (Your vehicle)"
+                value={driverDamageDetails}
+                onChangeSet={setDriverDamageDetails}
+              />
+              <div className={`${styles.canvas}`}>
+                <CanvasDraw
+                  canvasWidth={400}
+                  canvasHeight={200}
+                  lazyRadius={1}
+                  brushRadius={2}
+                  imgSrc="/damageVeh.png"
+                />
+              </div>
+
+              <FormInput
+                type="textarea"
+                rows={5}
+                cols={30}
+                label="Details of damage (Third party vehicle)"
+                value={tpDamageDetails}
+                onChangeSet={setTpDamageDetails}
               />
             </div>
-          </div>
+          )}
+          {/* Forth Page  */}
+          {formStep === 4 && (
+            <div
+              className={`${formStep !== 4 ? "display-none" : ""} ${
+                styles.form
+              }`}
+            >
+              <div>
+                <FormInput
+                  type="textarea"
+                  rows={10}
+                  cols={50}
+                  label=" Driver's Statement(Please explain fully and clearly what
+                happened)"
+                  value={driverStatement}
+                  onChangeSet={setDriverStatement}
+                />
+              </div>
+            </div>
+          )}
 
           {/* Fifth Page  */}
-
-          <div
-            className={`${formStep !== 5 ? "display-none" : ""} ${styles.form}`}
-          >
-            <label>Signature</label>
-            <SignatureCanvas
-              ref={signatureRef}
-              canvasProps={{
-                width: 300,
-                height: 200,
-                style: { border: "1px solid #000" },
-              }}
-              clearOnResize={false}
-            />
-            <button onClick={handleClearSignature}>Clear</button>
-          </div>
+          {formStep === 5 && (
+            <div
+              className={`${formStep !== 5 ? "display-none" : ""} ${
+                styles.form
+              }`}
+            >
+              <label>Signature</label>
+              <SignatureCanvas
+                ref={signatureRef}
+                canvasProps={{
+                  width: 300,
+                  height: 200,
+                  style: { border: "1px solid #000" },
+                }}
+                clearOnResize={false}
+              />
+              <button onClick={handleClearSignature}>Clear</button>
+            </div>
+          )}
           {/* ////////////////////////// */}
         </form>
       </div>
