@@ -52,6 +52,10 @@ interface FormContextValue {
   tpDamageDetails: string;
   driverStatement: string;
   driverSignature: string;
+  driverDamageVeh: string;
+  tpDamageVeh: string;
+  schemeBeforeAccident: string;
+  schemeAfterAccident: string;
 
   setStartAccident: (value: boolean) => void;
   setPhotoDetails: (value: boolean) => void;
@@ -93,6 +97,10 @@ interface FormContextValue {
   setDriverDamageDetails: (value: string) => void;
   setTpDamageDetails: (value: string) => void;
   setDriverStatement: (value: string) => void;
+  setDriverDamageVeh: (value: string) => void;
+  setTpDamageVeh: (value: string) => void;
+  setSchemeBeforeAccident: (value: string) => void;
+  setSchemeAfterAccident: (value: string) => void;
   setDriverSignature: (value: string) => void;
 }
 
@@ -145,15 +153,20 @@ function FormProvider({ children }: PropsWithChildren) {
   const [driverSpeed, setDriverSpeed] = useState("");
   const [tpSpeed, setTpSpeed] = useState("");
   const [driverDamageDetails, setDriverDamageDetails] = useState("");
+  const [driverDamageVeh, setDriverDamageVeh] = useState("");
+  const [tpDamageVeh, setTpDamageVeh] = useState("");
   const [tpDamageDetails, setTpDamageDetails] = useState("");
   const [driverStatement, setDriverStatement] = useState("");
+  const [schemeBeforeAccident, setSchemeBeforeAccident] = useState("");
+  const [schemeAfterAccident, setSchemeAfterAccident] = useState("");
   const [driverSignature, setDriverSignature] = useState("");
 
   ////////// Reference to Tp data
   const tpRef = useRef<HTMLFormElement>(null);
   const [tpFormData, setTpFormData] = useState<FormData | null>(null);
 
-  const STEPS_NUMBERS = 5;
+  // Number of steps in the form
+  const STEPS_NUMBERS = 6;
 
   return (
     <FormContext.Provider
@@ -205,6 +218,10 @@ function FormProvider({ children }: PropsWithChildren) {
         driverDamageDetails,
         tpDamageDetails,
         driverStatement,
+        driverDamageVeh,
+        tpDamageVeh,
+        schemeBeforeAccident,
+        schemeAfterAccident,
         driverSignature,
         setStartAccident,
         setIsVehInvolved,
@@ -241,6 +258,10 @@ function FormProvider({ children }: PropsWithChildren) {
         setDriverDamageDetails,
         setTpDamageDetails,
         setDriverStatement,
+        setDriverDamageVeh,
+        setTpDamageVeh,
+        setSchemeBeforeAccident,
+        setSchemeAfterAccident,
         setDriverSignature,
       }}
     >

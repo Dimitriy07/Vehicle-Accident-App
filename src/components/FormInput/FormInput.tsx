@@ -95,6 +95,7 @@ function FormInput({
       <>
         <label className={styles.label}>{label}</label>
         <textarea
+          placeholder={placeholder}
           rows={rows}
           cols={cols}
           value={stringValue}

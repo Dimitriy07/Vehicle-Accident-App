@@ -38,8 +38,3 @@
 .form select {
   font-size: 2.5rem;
 }
-
-.canvas canvas {
-  width: 300px;
-  height: 200px;
-}

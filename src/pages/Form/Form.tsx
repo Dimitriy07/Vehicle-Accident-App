@@ -1,6 +1,8 @@
 /* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useEffect, useRef } from "react";
+import { generatePDF } from "../../utils/generatePDF";
+
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { useFormContext } from "../../context/FormContext";
 
@@ -35,6 +37,10 @@ function Form() {
     driverDamageDetails,
     tpDamageDetails,
     driverStatement,
+    driverDamageVeh,
+    tpDamageVeh,
+    schemeBeforeAccident,
+    schemeAfterAccident,
     driverSignature,
 
     setFormStep,
@@ -57,8 +63,14 @@ function Form() {
     setDriverDamageDetails,
     setTpDamageDetails,
     setDriverStatement,
+    setDriverDamageVeh,
+    setTpDamageVeh,
+    setSchemeBeforeAccident,
+    setSchemeAfterAccident,
     setDriverSignature,
   } = useFormContext();
+
+  const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
 
   const navigate = useNavigate();
 
@@ -70,8 +82,23 @@ function Form() {
     [setDriverForm]
   );
 
+  useEffect(
+    function () {
+      function handleWindowWidth() {
+        setWindowWidth(window.innerHeight);
+      }
+      window.addEventListener("resize", handleWindowWidth);
+
+      return () => window.removeEventListener("resize", handleWindowWidth);
+    },
+    [windowWidth]
+  );
+
+  const driverVehCanvasRef = useRef<CanvasDraw>(null);
+  const tpVehCanvasRef = useRef<CanvasDraw>(null);
+  const schemaBeforeCanvasRef = useRef<CanvasDraw>(null);
+  const schemaAfterCanvasRef = useRef<CanvasDraw>(null);
   const signatureRef = useRef<SignatureCanvas>(null);
-  const driverVehCanvas = useRef<CanvasDraw>(null);
 
   function handleNext(): void {
     setFormStep(() => formStep + 1);
@@ -79,6 +106,31 @@ function Form() {
 
   function handleBack(): void {
     setFormStep(() => formStep - 1);
+  }
+
+  function handleDriverDamageCanvas(e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    const canvasDriverData = driverVehCanvasRef.current?.getSaveData();
+    if (canvasDriverData === undefined) return;
+    setDriverDamageVeh(canvasDriverData);
+  }
+  function handleTpDamageCanvas(e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    const canvasTpData = tpVehCanvasRef.current?.getSaveData();
+    if (canvasTpData === undefined) return;
+    setSchemeBeforeAccident(canvasTpData);
+  }
+  function handleBeforeAccCanvas(e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    const canvasBeforeAcc = schemaBeforeCanvasRef.current?.getSaveData();
+    if (canvasBeforeAcc === undefined) return;
+    setTpDamageVeh(canvasBeforeAcc);
+  }
+  function handleAfterAccCanvas(e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    const canvasAfterAcc = schemaAfterCanvasRef.current?.getSaveData();
+    if (canvasAfterAcc === undefined) return;
+    setTpDamageVeh(canvasAfterAcc);
   }
 
   function handleClearSignature(e: React.MouseEvent<HTMLButtonElement>): void {
@@ -245,41 +297,62 @@ function Form() {
           {/* Third Page  */}
           {formStep === 3 && (
             <div className={`${styles.form}`}>
-              <FormInput
-                type="textarea"
-                rows={5}
-                cols={30}
-                label="Details of damage (Your vehicle)"
-                value={driverDamageDetails}
-                onChangeSet={setDriverDamageDetails}
-              />
-              <div className={`${styles.canvas}`}>
+              <fieldset>
+                <legend>Your vehicle</legend>
+
                 <CanvasDraw
-                  canvasWidth={400}
-                  canvasHeight={200}
+                  ref={driverVehCanvasRef}
+                  canvasWidth={windowWidth - 30}
+                  canvasHeight={150}
                   lazyRadius={1}
                   brushRadius={2}
                   imgSrc="/damageVeh.png"
                 />
-              </div>
 
-              <FormInput
-                type="textarea"
-                rows={5}
-                cols={30}
-                label="Details of damage (Third party vehicle)"
-                value={tpDamageDetails}
-                onChangeSet={setTpDamageDetails}
-              />
+                <FormInput
+                  type="textarea"
+                  placeholder="Your Vehicle Damage Description"
+                  rows={5}
+                  cols={30}
+                  label="Details of damage (Your vehicle)"
+                  value={driverDamageDetails}
+                  onChangeSet={setDriverDamageDetails}
+                />
+              </fieldset>
+              <fieldset>
+                <legend>TP Vehcile</legend>
+
+                <CanvasDraw
+                  ref={tpVehCanvasRef}
+                  canvasWidth={windowWidth - 30}
+                  canvasHeight={150}
+                  lazyRadius={1}
+                  brushRadius={2}
+                  imgSrc="/damageVeh.png"
+                />
+                <FormInput
+                  type="textarea"
+                  placeholder="TP Vehicle Damage Description"
+                  rows={5}
+                  cols={30}
+                  label="Details of damage (Third party vehicle)"
+                  value={tpDamageDetails}
+                  onChangeSet={setTpDamageDetails}
+                />
+              </fieldset>
+              <button
+                onClick={(e) => {
+                  handleDriverDamageCanvas(e);
+                  handleTpDamageCanvas(e);
+                }}
+              >
+                SAVE
+              </button>
             </div>
           )}
           {/* Forth Page  */}
           {formStep === 4 && (
-            <div
-              className={`${formStep !== 4 ? "display-none" : ""} ${
-                styles.form
-              }`}
-            >
+            <div className={`${styles.form}`}>
               <div>
                 <FormInput
                   type="textarea"
@@ -296,22 +369,54 @@ function Form() {
 
           {/* Fifth Page  */}
           {formStep === 5 && (
-            <div
-              className={`${formStep !== 5 ? "display-none" : ""} ${
-                styles.form
-              }`}
-            >
+            <div className={`${styles.form}`}>
+              <label>Draw Scheme Before Accident</label>
+              <CanvasDraw
+                ref={schemaBeforeCanvasRef}
+                canvasWidth={windowWidth - 20}
+                canvasHeight={250}
+                brushColor="#000"
+                brushRadius={2}
+                lazyRadius={1}
+                hideInterface={false}
+                style={{ border: "1px solid #ccc", borderRadius: "8px" }}
+              />{" "}
+              <label>Draw Scheme After Accident</label>
+              <CanvasDraw
+                ref={schemaAfterCanvasRef}
+                canvasWidth={windowWidth - 20}
+                canvasHeight={250}
+                brushColor="#000"
+                brushRadius={2}
+                lazyRadius={1}
+                hideInterface={false}
+                style={{ border: "1px solid #ccc", borderRadius: "8px" }}
+              />
+              <button
+                onClick={(e) => {
+                  handleBeforeAccCanvas(e);
+                  handleAfterAccCanvas(e);
+                }}
+              >
+                SAVE
+              </button>
+            </div>
+          )}
+
+          {formStep === 6 && (
+            <div className={`${styles.form}`}>
               <label>Signature</label>
               <SignatureCanvas
                 ref={signatureRef}
                 canvasProps={{
                   width: 300,
                   height: 200,
-                  style: { border: "1px solid #000" },
+                  style: { border: "1px solid #ccc", borderRadius: "8px" },
                 }}
                 clearOnResize={false}
               />
               <button onClick={handleClearSignature}>Clear</button>
+              <button>SUBMIT</button>
             </div>
           )}
           {/* ////////////////////////// */}
@@ -333,7 +438,7 @@ function Form() {
           <div></div>
         ) : (
           <Button onClick={() => formStep < STEPS_NUMBERS && handleNext()}>
-            Next
+            {formStep === STEPS_NUMBERS ? "Submit" : "Next"}
           </Button>
         )}
       </div>
