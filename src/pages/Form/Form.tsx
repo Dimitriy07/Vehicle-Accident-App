@@ -13,6 +13,7 @@ import Button from "../../components/Button/Button";
 import FormInput from "../../components/FormInput/FormInput";
 
 import styles from "./Form.module.css";
+import { useContextData } from "../../hooks/useContextData";
 
 function Form() {
   const {
@@ -71,11 +72,13 @@ function Form() {
   } = useFormContext();
 
   const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
+  const data = useContextData();
 
   const navigate = useNavigate();
 
   useEffect(
     function () {
+      console.log(data);
       setDriverForm(true);
       return () => setDriverForm(false);
     },
@@ -118,19 +121,19 @@ function Form() {
     e.preventDefault();
     const canvasTpData = tpVehCanvasRef.current?.getSaveData();
     if (canvasTpData === undefined) return;
-    setSchemeBeforeAccident(canvasTpData);
+    setTpDamageVeh(canvasTpData);
   }
   function handleBeforeAccCanvas(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     const canvasBeforeAcc = schemaBeforeCanvasRef.current?.getSaveData();
     if (canvasBeforeAcc === undefined) return;
-    setTpDamageVeh(canvasBeforeAcc);
+    setSchemeBeforeAccident(canvasBeforeAcc);
   }
   function handleAfterAccCanvas(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     const canvasAfterAcc = schemaAfterCanvasRef.current?.getSaveData();
     if (canvasAfterAcc === undefined) return;
-    setTpDamageVeh(canvasAfterAcc);
+    setSchemeAfterAccident(canvasAfterAcc);
   }
 
   function handleClearSignature(e: React.MouseEvent<HTMLButtonElement>): void {
@@ -416,7 +419,7 @@ function Form() {
                 clearOnResize={false}
               />
               <button onClick={handleClearSignature}>Clear</button>
-              <button>SUBMIT</button>
+              {/* <button onClick={() => generatePDF(data)}>SUBMIT</button> */}
             </div>
           )}
           {/* ////////////////////////// */}

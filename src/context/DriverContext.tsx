@@ -43,7 +43,7 @@ function DriverProvider({ children }: { children: React.ReactNode }) {
     const driver = [...drivers]?.find((driv) => {
       return driv.id === id;
     });
-    setDriver((driver) => driver);
+    setDriver(driver);
     console.log(driver);
   }
 
