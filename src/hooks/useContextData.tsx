@@ -1,11 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useDriver } from "../context/DriverContext";
-// import { useFormContext } from "../context/FormContext";
+import { useFormContext } from "../context/FormContext";
+import { DriverType } from "../types/DriverType";
+import { FormContextValue } from "../types/FormType";
 
 export function useContextData() {
-  //   const formContext = useFormContext();
+  type ContextDataObj = DriverType & FormContextValue;
+  const formContext = useFormContext();
   const driverContext = useDriver();
 
-  const dataObj = { ...driverContext.driver };
+  const dataObj: Partial<ContextDataObj> = {
+    ...driverContext.driver,
+    ...formContext,
+  };
   return dataObj;
 }

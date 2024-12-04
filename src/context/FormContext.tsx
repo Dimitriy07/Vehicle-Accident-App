@@ -11,7 +11,7 @@ import {
 interface FormContextValue {
   startAccident: boolean;
   photoDetailsDone: boolean;
-  tpDetailsDone: any;
+  tpDetailsDone: boolean;
   callManagerDone: boolean;
   steps: boolean;
   stepsDone: boolean;

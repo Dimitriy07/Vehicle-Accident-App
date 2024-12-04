@@ -151,7 +151,7 @@ function Form() {
   return (
     <div className="container-input__form">
       <div>
-        <form className={`${styles.form} ${stepsDone ? "display-none" : ""}`}>
+        <form className={`${styles.form} ${!stepsDone ? "display-none" : ""}`}>
           {/* First Page  */}
           {formStep === 1 && (
             <div className={`${styles.form}`}>
@@ -419,7 +419,14 @@ function Form() {
                 clearOnResize={false}
               />
               <button onClick={handleClearSignature}>Clear</button>
-              {/* <button onClick={() => generatePDF(data)}>SUBMIT</button> */}
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  generatePDF(data);
+                }}
+              >
+                SUBMIT
+              </button>
             </div>
           )}
           {/* ////////////////////////// */}
@@ -437,7 +444,7 @@ function Form() {
         >
           Back
         </Button>
-        {stepsDone ? (
+        {!stepsDone ? (
           <div></div>
         ) : (
           <Button onClick={() => formStep < STEPS_NUMBERS && handleNext()}>
