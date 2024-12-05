@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   createContext,
   useContext,
@@ -107,14 +105,6 @@ interface FormContextValue {
 const FormContext = createContext<Partial<FormContextValue> | null>(null);
 
 function FormProvider({ children }: PropsWithChildren) {
-  const [startAccident, setStartAccident] = useState<boolean>(false);
-  ////// Steps state
-  const [photoDetailsDone, setPhotoDetails] = useState<boolean>(false);
-  const [tpDetailsDone, setTpDetails] = useState<boolean>(false);
-  const [callManagerDone, setCallManager] = useState<boolean>(false);
-  const [steps, setSteps] = useState<boolean>(false);
-  const [stepsDone, setStepsDone] = useState<boolean>(false);
-
   ////// TP Details info
   const [isVehInvolved, setIsVehInvolved] = useState("yes");
   const [isTpDriverOwner, setTpIsDriverOwner] = useState("yes");
@@ -171,17 +161,6 @@ function FormProvider({ children }: PropsWithChildren) {
   return (
     <FormContext.Provider
       value={{
-        startAccident,
-        photoDetailsDone,
-        tpDetailsDone,
-        callManagerDone,
-        steps,
-        stepsDone,
-        setPhotoDetails,
-        setTpDetails,
-        setCallManager,
-        setSteps,
-        setStepsDone,
         isVehInvolved,
         isTpDriverOwner,
         tpRegNumber,
@@ -223,7 +202,7 @@ function FormProvider({ children }: PropsWithChildren) {
         schemeBeforeAccident,
         schemeAfterAccident,
         driverSignature,
-        setStartAccident,
+
         setIsVehInvolved,
         setTpIsDriverOwner,
         setTpRegNumber,

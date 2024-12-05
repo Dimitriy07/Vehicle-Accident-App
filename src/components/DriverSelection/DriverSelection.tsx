@@ -2,7 +2,7 @@
 import styles from "./DriverSelection.module.css";
 
 import { useDriver } from "../../context/DriverContext";
-import { DriverType } from "../../types/DriverType";
+import { DriverType } from "../../types/drivers/DriverType";
 
 interface DriverSelectionChildren {
   children: string;

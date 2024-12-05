@@ -1,10 +1,4 @@
 export interface FormContextValue {
-  startAccident: boolean;
-  photoDetailsDone: boolean;
-  tpDetailsDone: boolean;
-  callManagerDone: boolean;
-  steps: boolean;
-  stepsDone: boolean;
   isVehInvolved: string;
   isTpDriverOwner: string;
   tpRegNumber: string;
@@ -47,12 +41,6 @@ export interface FormContextValue {
   schemeBeforeAccident: string;
   schemeAfterAccident: string;
 
-  setStartAccident: (value: boolean) => void;
-  setPhotoDetails: (value: boolean) => void;
-  setTpDetails: (value: boolean) => void;
-  setCallManager: (value: boolean) => void;
-  setSteps: (value: boolean) => void;
-  setStepsDone: (value: boolean) => void;
   setIsVehInvolved: (value: string) => void;
   setTpIsDriverOwner: (value: string) => void;
   setTpRegNumber: (value: string) => void;

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createContext, useContext, useEffect, useState } from "react";
-import { DriverType } from "../types/DriverType";
+import { DriverType } from "../types/drivers/DriverType";
 
 const fakeUsersArr: { drivers: DriverType[] } = {
   drivers: [
