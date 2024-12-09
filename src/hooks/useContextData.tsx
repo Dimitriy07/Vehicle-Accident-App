@@ -2,10 +2,9 @@
 import { useDriver } from "../context/DriverContext";
 import { useFormContext } from "../context/FormContext";
 import { DriverType } from "../types/drivers/DriverType";
-import { FormContextValue } from "../types/forms/FormContextValue";
 
 export function useContextData() {
-  type ContextDataObj = DriverType & FormContextValue;
+  type ContextDataObj = DriverType;
   const formContext = useFormContext();
   const driverContext = useDriver();
 

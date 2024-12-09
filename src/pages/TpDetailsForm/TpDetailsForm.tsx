@@ -3,14 +3,13 @@ import { useNavigate } from "react-router";
 import Button from "../../components/Button/Button";
 import FormInput from "../../components/FormInput/FormInput";
 
-import { useFormContext } from "../../context/FormContext";
-
 import styles from "./TpDetailsForm.module.css";
+import { useLogicState } from "../../context/LogicStateContext";
+import { useTpDetails } from "../../context/TpDetailsContext";
 
 function TpDetailsForm() {
   const navigate = useNavigate();
   const {
-    setTpDetails,
     isVehInvolved,
     isTpDriverOwner,
     tpRegNumber,
@@ -39,7 +38,9 @@ function TpDetailsForm() {
     setTpInsuranceCompany,
     setTpPolicyNo,
     setTpFormData,
-  } = useFormContext();
+  } = useTpDetails();
+
+  const { setIsTpDetailsDone } = useLogicState();
 
   function handleSaveForm() {
     if (tpRef.current) {
@@ -198,7 +199,7 @@ function TpDetailsForm() {
         <Button
           onClick={() => {
             handleSaveForm();
-            setTpDetails(true);
+            setIsTpDetailsDone(true);
             navigate("/steps-nav/steps", { replace: true });
           }}
         >

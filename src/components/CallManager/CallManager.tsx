@@ -1,12 +1,13 @@
 import { useEffect } from "react";
-import { useFormContext } from "../../context/FormContext";
+
+import { useLogicState } from "../../context/LogicStateContext";
 
 function CallManager() {
-  const { setCallManager } = useFormContext();
+  const { setIsCallManagerDone } = useLogicState();
 
   useEffect(() => {
-    setCallManager(true);
-  }, [setCallManager]);
+    setIsCallManagerDone(true);
+  }, [setIsCallManagerDone]);
 
   return <h1 style={{ fontSize: "3rem" }}>Call Manager</h1>;
 }

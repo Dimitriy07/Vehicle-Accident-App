@@ -1,0 +1,31 @@
+export interface TpDetailsType {
+  isVehInvolved: string;
+  isTpDriverOwner: string;
+  tpRegNumber: string;
+  tpMake: string;
+  tpModel: string;
+  tpOwnerName: string;
+  tpOwnerTelephone: string;
+  tpOwnerAddress: string;
+  tpDriverName: string;
+  tpDriverTelephone: string;
+  tpDriverAddress: string;
+  tpInsuranceCompany: string;
+  tpPolicyNo: string;
+  tpRef: React.RefObject<HTMLFormElement>;
+  tpFormData: FormData | null;
+  setIsVehInvolved: (value: string) => void;
+  setTpIsDriverOwner: (value: string) => void;
+  setTpRegNumber: (value: string) => void;
+  setTpMake: (value: string) => void;
+  setTpModel: (value: string) => void;
+  setTpOwnerName: (value: string) => void;
+  setTpOwnerTelephone: (value: string) => void;
+  setTpOwnerAddress: (value: string) => void;
+  setTpDriverName: (value: string) => void;
+  setTpDriverTelephone: (value: string) => void;
+  setTpDriverAddress: (value: string) => void;
+  setTpInsuranceCompany: (value: string) => void;
+  setTpPolicyNo: (value: string) => void;
+  setTpFormData: (value: FormData) => void;
+}

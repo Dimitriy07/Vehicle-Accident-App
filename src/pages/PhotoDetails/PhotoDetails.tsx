@@ -1,14 +1,14 @@
 import { useNavigate } from "react-router";
 
-import Button from "../../components/Button/Button";
+import { useLogicState } from "../../context/LogicStateContext";
 
-import { useFormContext } from "../../context/FormContext";
+import Button from "../../components/Button/Button";
 
 import styles from "./PhotoDetails.module.css";
 
 function PictureDetails() {
   const navigate = useNavigate();
-  const { setPhotoDetails } = useFormContext();
+  const { setIsPhotoDetailsDone } = useLogicState();
   return (
     <div className={`${styles.photoDetails} ${styles.containerDisplayPhoto}`}>
       <ul>
@@ -26,7 +26,7 @@ function PictureDetails() {
         </Button>
         <Button
           onClick={() => {
-            setPhotoDetails(true);
+            setIsPhotoDetailsDone(true);
             navigate("/steps-nav/steps", { replace: true });
           }}
         >

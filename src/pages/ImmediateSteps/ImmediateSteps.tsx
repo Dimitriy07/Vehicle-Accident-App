@@ -1,28 +1,30 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import emailjs from "@emailjs/browser";
 
-import Button from "../../components/Button/Button";
-
-import { Link, Outlet, useNavigate } from "react-router-dom";
-import { useFormContext } from "../../context/FormContext";
-
-import { createHtmlFromData } from "../../utils/createHtmlForm";
 import { useEffect } from "react";
 
-function Steps() {
+import { Link, Outlet, useNavigate } from "react-router-dom";
+
+import { useLogicState } from "../../context/LogicStateContext";
+import { createHtmlFromData } from "../../utils/createHtmlForm";
+
+import Button from "../../components/Button/Button";
+import { useTpDetails } from "../../context/TpDetailsContext";
+
+function ImmediateSteps() {
   const navigate = useNavigate();
   const {
-    photoDetailsDone,
-    tpDetailsDone,
-    callManagerDone,
-    tpFormData,
-    setSteps,
-    setStepsDone,
-  } = useFormContext();
+    isPhotoDetailsDone,
+    isTpDetailsDone,
+    isCallManagerDone,
+    setIsStepsStarts,
+    setIsStepsDone,
+  } = useLogicState();
+  const { tpFormData } = useTpDetails();
 
   useEffect(() => {
-    setSteps(true);
-  }, [setSteps]);
+    setIsStepsStarts(true);
+  }, [setIsStepsStarts]);
 
   // Create a new form element from FormData to HTML Form Data
   const recreatedForm = createHtmlFromData(tpFormData);
@@ -56,7 +58,7 @@ function Steps() {
           <Link
             to="photos"
             className={`${"link-cta navigate"} ${
-              photoDetailsDone ? "checked" : ""
+              isPhotoDetailsDone ? "checked" : ""
             }`}
           >
             Photos
@@ -66,7 +68,7 @@ function Steps() {
           <Link
             to="tp-details"
             className={`${"link-cta navigate"} ${
-              tpDetailsDone ? "checked" : ""
+              isTpDetailsDone ? "checked" : ""
             }`}
           >
             TP Details
@@ -76,7 +78,7 @@ function Steps() {
           <Link
             to="call-manager"
             className={`${"link-cta navigate"} ${
-              callManagerDone ? "checked" : ""
+              isCallManagerDone ? "checked" : ""
             }`}
           >
             Call Manager
@@ -94,7 +96,7 @@ function Steps() {
         <Button
           onClick={() => {
             // sendEmail();
-            setStepsDone(true);
+            setIsStepsDone(true);
             navigate("/steps-nav", { replace: true });
           }}
         >
@@ -105,4 +107,4 @@ function Steps() {
   );
 }
 
-export default Steps;
+export default ImmediateSteps;

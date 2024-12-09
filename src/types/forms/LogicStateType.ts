@@ -1,14 +1,16 @@
 export interface LogicStateType {
-  startAccident: boolean;
-  photoDetailsDone: boolean;
-  tpDetailsDone: boolean;
-  callManagerDone: boolean;
-  steps: boolean;
-  stepsDone: boolean;
-  setStartAccident: (value: boolean) => void;
-  setPhotoDetails: (value: boolean) => void;
-  setTpDetails: (value: boolean) => void;
-  setCallManager: (value: boolean) => void;
-  setSteps: (value: boolean) => void;
-  setStepsDone: (value: boolean) => void;
+  isStartAccident: boolean;
+  isPhotoDetailsDone: boolean;
+  isTpDetailsDone: boolean;
+  isCallManagerDone: boolean;
+  isStepsStarts: boolean;
+  isStepsDone: boolean;
+  isDriverFormStarts: boolean;
+  setIsStartAccident: (value: boolean) => void;
+  setIsPhotoDetailsDone: (value: boolean) => void;
+  setIsTpDetailsDone: (value: boolean) => void;
+  setIsCallManagerDone: (value: boolean) => void;
+  setIsStepsStarts: (value: boolean) => void;
+  setIsStepsDone: (value: boolean) => void;
+  setIsDriverFormStarts: (value: boolean) => void;
 }
