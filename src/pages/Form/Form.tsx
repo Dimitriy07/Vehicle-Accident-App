@@ -1,7 +1,4 @@
-/* eslint-disable prefer-const */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { useFormContext } from "../../context/FormContext";
 
@@ -17,11 +14,22 @@ import FormStepFive from "./FormSteps/FormStepFive";
 import FormStepSix from "./FormSteps/FormStepSix";
 
 import styles from "./Form.module.css";
+import { useCanvas } from "../../context/CanvasContext";
 
 function Form() {
   const { STEPS_NUMBERS, formStep, setFormStep } = useFormContext();
 
-  const { isStepsDone, setIsDriverFormStarts } = useLogicState();
+  const { isStepsDone, setIsDriverFormStarts, isVehDamageCanvasSave } =
+    useLogicState();
+
+  const {
+    driverDamageVeh,
+    // tpDamageVeh,
+    handleDriverDamageCanvas,
+    handleTpDamageCanvas,
+    driverVehCanvasRef,
+    tpVehCanvasRef,
+  } = useCanvas();
 
   const navigate = useNavigate();
 
@@ -82,7 +90,15 @@ function Form() {
         {!isStepsDone ? (
           <div></div>
         ) : (
-          <Button onClick={() => formStep < STEPS_NUMBERS && handleNext()}>
+          <Button
+            onClick={() => {
+              if (formStep < STEPS_NUMBERS) handleNext();
+              if (isVehDamageCanvasSave) {
+                handleDriverDamageCanvas(driverVehCanvasRef);
+                handleTpDamageCanvas(tpVehCanvasRef);
+              }
+            }}
+          >
             {formStep === STEPS_NUMBERS ? "Submit" : "Next"}
           </Button>
         )}

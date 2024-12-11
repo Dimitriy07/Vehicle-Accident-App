@@ -4,6 +4,7 @@ function useCanvasHandler(setStateFn: (data: string) => void) {
   return (ref: React.RefObject<CanvasDraw>) => {
     try {
       const canvas = ref.current?.getSaveData();
+      console.log("i am in");
       if (canvas) setStateFn(canvas);
     } catch (err) {
       console.log("Failed to get canvas data", err);

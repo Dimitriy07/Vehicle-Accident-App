@@ -12,6 +12,9 @@ function LogicStateProvider({ children }: PropsWithChildren) {
   const [isStepsStarts, setIsStepsStarts] = useState<boolean>(false);
   const [isStepsDone, setIsStepsDone] = useState<boolean>(false);
   const [isDriverFormStarts, setIsDriverFormStarts] = useState(false);
+  const [isVehDamageCanvasSave, setIsVehDamageCanvasSave] = useState(false);
+  const [isSchemaCanvasSave, setIsSchemaCanvasSave] = useState(false);
+
   return (
     <LogicStateContext.Provider
       value={{
@@ -22,6 +25,8 @@ function LogicStateProvider({ children }: PropsWithChildren) {
         isStepsStarts,
         isStepsDone,
         isDriverFormStarts,
+        isVehDamageCanvasSave,
+        isSchemaCanvasSave,
         setIsStartAccident,
         setIsPhotoDetailsDone,
         setIsTpDetailsDone,
@@ -29,6 +34,8 @@ function LogicStateProvider({ children }: PropsWithChildren) {
         setIsStepsStarts,
         setIsStepsDone,
         setIsDriverFormStarts,
+        setIsVehDamageCanvasSave,
+        setIsSchemaCanvasSave,
       }}
     >
       {children}

@@ -6,6 +6,8 @@ export interface LogicStateType {
   isStepsStarts: boolean;
   isStepsDone: boolean;
   isDriverFormStarts: boolean;
+  isVehDamageCanvasSave: boolean;
+  isSchemaCanvasSave: boolean;
   setIsStartAccident: (value: boolean) => void;
   setIsPhotoDetailsDone: (value: boolean) => void;
   setIsTpDetailsDone: (value: boolean) => void;
@@ -13,4 +15,6 @@ export interface LogicStateType {
   setIsStepsStarts: (value: boolean) => void;
   setIsStepsDone: (value: boolean) => void;
   setIsDriverFormStarts: (value: boolean) => void;
+  setIsVehDamageCanvasSave: (value: boolean) => void;
+  setIsSchemaCanvasSave: (value: boolean) => void;
 }

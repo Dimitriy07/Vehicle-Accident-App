@@ -1,11 +1,11 @@
-import { useRef } from "react";
 import { useCanvas } from "../../../context/CanvasContext";
 import { useFormContext } from "../../../context/FormContext";
 import CanvasDraw from "react-canvas-draw";
 import FormInput from "../../../components/FormInput/FormInput";
 import styles from "../Form.module.css";
 import useWindowWidth from "../../../hooks/useWindowWidth";
-import useCanvasHandler from "../../../hooks/useCanvasHandler";
+import { useEffect } from "react";
+import { useLogicState } from "../../../context/LogicStateContext";
 
 function FormStepThree() {
   const [windowWidth] = useWindowWidth();
@@ -16,15 +16,18 @@ function FormStepThree() {
     setTpDamageDetails,
   } = useFormContext();
 
-  const { driverDamageVeh, setDriverDamageVeh, setTpDamageVeh } = useCanvas();
+  const { driverDamageVeh, tpDamageVeh, driverVehCanvasRef, tpVehCanvasRef } =
+    useCanvas();
 
-  // get window width to adjust canvas width
+  const { setIsVehDamageCanvasSave } = useLogicState();
 
-  const handleDriverDamageCanvas = useCanvasHandler(setDriverDamageVeh);
-  const handleTpDamageCanvas = useCanvasHandler(setTpDamageVeh);
-
-  const driverVehCanvasRef = useRef<CanvasDraw>(null);
-  const tpVehCanvasRef = useRef<CanvasDraw>(null);
+  useEffect(
+    function () {
+      setIsVehDamageCanvasSave(true);
+      return setIsVehDamageCanvasSave(false);
+    },
+    [setIsVehDamageCanvasSave]
+  );
 
   return (
     <div className={`${styles.form}`}>
@@ -38,8 +41,16 @@ function FormStepThree() {
           lazyRadius={1}
           brushRadius={2}
           imgSrc="/damageVeh.png"
+          saveData={driverDamageVeh}
         />
-
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            driverVehCanvasRef.current?.clear();
+          }}
+        >
+          Clear
+        </button>
         <FormInput
           type="textarea"
           placeholder="Your Vehicle Damage Description"
@@ -60,7 +71,16 @@ function FormStepThree() {
           lazyRadius={1}
           brushRadius={2}
           imgSrc="/damageVeh.png"
+          saveData={tpDamageVeh}
         />
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            tpVehCanvasRef.current?.clear();
+          }}
+        >
+          Clear
+        </button>
         <FormInput
           type="textarea"
           placeholder="TP Vehicle Damage Description"
@@ -74,24 +94,9 @@ function FormStepThree() {
       <button
         onClick={(e) => {
           e.preventDefault();
-          handleDriverDamageCanvas(driverVehCanvasRef);
-          handleTpDamageCanvas(tpVehCanvasRef);
         }}
       >
         SAVE
-      </button>
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-          const x = driverVehCanvasRef.current?.loadSaveData(
-            driverDamageVeh,
-            true
-          );
-          console.log(driverVehCanvasRef.current);
-          console.log(x);
-        }}
-      >
-        watch
       </button>
     </div>
   );
