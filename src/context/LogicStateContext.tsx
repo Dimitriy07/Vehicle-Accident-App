@@ -11,9 +11,11 @@ function LogicStateProvider({ children }: PropsWithChildren) {
   const [isCallManagerDone, setIsCallManagerDone] = useState<boolean>(false);
   const [isStepsStarts, setIsStepsStarts] = useState<boolean>(false);
   const [isStepsDone, setIsStepsDone] = useState<boolean>(false);
-  const [isDriverFormStarts, setIsDriverFormStarts] = useState(false);
-  const [isVehDamageCanvasSave, setIsVehDamageCanvasSave] = useState(false);
-  const [isSchemaCanvasSave, setIsSchemaCanvasSave] = useState(false);
+  const [isDriverFormStarts, setIsDriverFormStarts] = useState<boolean>(false);
+  const [isVehDamageCanvasSave, setIsVehDamageCanvasSave] =
+    useState<boolean>(false);
+  const [isSchemaCanvasSave, setIsSchemaCanvasSave] = useState<boolean>(false);
+  const [isDriverSignature, setIsDriverSignature] = useState<boolean>(false);
 
   return (
     <LogicStateContext.Provider
@@ -27,6 +29,7 @@ function LogicStateProvider({ children }: PropsWithChildren) {
         isDriverFormStarts,
         isVehDamageCanvasSave,
         isSchemaCanvasSave,
+        isDriverSignature,
         setIsStartAccident,
         setIsPhotoDetailsDone,
         setIsTpDetailsDone,
@@ -36,6 +39,7 @@ function LogicStateProvider({ children }: PropsWithChildren) {
         setIsDriverFormStarts,
         setIsVehDamageCanvasSave,
         setIsSchemaCanvasSave,
+        setIsDriverSignature,
       }}
     >
       {children}

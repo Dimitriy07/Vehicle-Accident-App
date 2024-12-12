@@ -15,20 +15,32 @@ import FormStepSix from "./FormSteps/FormStepSix";
 
 import styles from "./Form.module.css";
 import { useCanvas } from "../../context/CanvasContext";
+import useCanvasHandler from "../../hooks/useCanvasHandler";
 
 function Form() {
   const { STEPS_NUMBERS, formStep, setFormStep } = useFormContext();
 
-  const { isStepsDone, setIsDriverFormStarts, isVehDamageCanvasSave } =
-    useLogicState();
+  const {
+    isStepsDone,
+    isVehDamageCanvasSave,
+    isSchemaCanvasSave,
+    isDriverSignature,
+    setIsDriverFormStarts,
+    setIsVehDamageCanvasSave,
+    setIsSchemaCanvasSave,
+  } = useLogicState();
 
   const {
-    driverDamageVeh,
-    // tpDamageVeh,
-    handleDriverDamageCanvas,
-    handleTpDamageCanvas,
     driverVehCanvasRef,
     tpVehCanvasRef,
+    schemaBeforeCanvasRef,
+    schemaAfterCanvasRef,
+    signatureRef,
+    setDriverDamageVeh,
+    setTpDamageVeh,
+    setSchemeBeforeAccident,
+    setSchemeAfterAccident,
+    setDriverSignature,
   } = useCanvas();
 
   const navigate = useNavigate();
@@ -49,6 +61,38 @@ function Form() {
     setFormStep(() => formStep - 1);
   }
 
+  // to use conditionally useCanvasHandler in button
+  const saveDriverDamageCanvas = useCanvasHandler(
+    driverVehCanvasRef,
+    setDriverDamageVeh
+  );
+  const saveTpDamageCanvas = useCanvasHandler(tpVehCanvasRef, setTpDamageVeh);
+  const saveSchemeBeforeAccident = useCanvasHandler(
+    schemaBeforeCanvasRef,
+    setSchemeBeforeAccident
+  );
+  const saveSchemeAfterAccident = useCanvasHandler(
+    schemaAfterCanvasRef,
+    setSchemeAfterAccident
+  );
+
+  const saveDriverSignature = useCanvasHandler(
+    signatureRef,
+    setDriverSignature
+  );
+
+  function handleDamageCanvas() {
+    saveDriverDamageCanvas();
+    saveTpDamageCanvas();
+    setIsVehDamageCanvasSave(false);
+  }
+
+  function handleSchemeCanvas() {
+    saveSchemeBeforeAccident();
+    saveSchemeAfterAccident();
+    setIsSchemaCanvasSave(false);
+  }
+
   // Change isStepsDone = true condition in <form></form> and button while developing (change back for production)
   return (
     <div className="container-input__form">
@@ -65,12 +109,14 @@ function Form() {
 
           {/* Third Page  */}
           {formStep === 3 && <FormStepThree />}
+
           {/* Forth Page  */}
           {formStep === 4 && <FormStepFour />}
 
           {/* Fifth Page  */}
           {formStep === 5 && <FormStepFive />}
 
+          {/* Sixth Page  */}
           {formStep === 6 && <FormStepSix />}
           {/* ////////////////////////// */}
         </form>
@@ -83,6 +129,12 @@ function Form() {
             } else {
               navigate("/steps-nav", { replace: true });
             }
+            if (isVehDamageCanvasSave) {
+              handleDamageCanvas();
+            }
+            if (isSchemaCanvasSave) {
+              handleSchemeCanvas();
+            }
           }}
         >
           Back
@@ -94,9 +146,12 @@ function Form() {
             onClick={() => {
               if (formStep < STEPS_NUMBERS) handleNext();
               if (isVehDamageCanvasSave) {
-                handleDriverDamageCanvas(driverVehCanvasRef);
-                handleTpDamageCanvas(tpVehCanvasRef);
+                handleDamageCanvas();
               }
+              if (isSchemaCanvasSave) {
+                handleSchemeCanvas();
+              }
+              if (isDriverSignature) saveDriverSignature();
             }}
           >
             {formStep === STEPS_NUMBERS ? "Submit" : "Next"}

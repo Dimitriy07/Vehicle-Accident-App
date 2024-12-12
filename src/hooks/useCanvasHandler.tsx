@@ -1,15 +1,26 @@
+import { useCallback } from "react";
 import CanvasDraw from "react-canvas-draw";
+import SignatureCanvas from "react-signature-canvas";
 
-function useCanvasHandler(setStateFn: (data: string) => void) {
-  return (ref: React.RefObject<CanvasDraw>) => {
+type CanvasRef = React.RefObject<CanvasDraw | SignatureCanvas>;
+
+function useCanvasHandler(ref: CanvasRef, setStateFn: (data: string) => void) {
+  return useCallback(() => {
     try {
-      const canvas = ref.current?.getSaveData();
-      console.log("i am in");
-      if (canvas) setStateFn(canvas);
+      const currentCanvas = ref.current;
+      if (!currentCanvas) return;
+
+      if ("getSaveData" in currentCanvas) {
+        const canvasData = currentCanvas.getSaveData();
+        if (canvasData) setStateFn(canvasData);
+      } else if ("toDataURL" in currentCanvas) {
+        const canvasData = currentCanvas.toDataURL();
+        if (canvasData) setStateFn(canvasData);
+      }
     } catch (err) {
-      console.log("Failed to get canvas data", err);
+      console.error("Failed to get canvas data", err);
     }
-  };
+  }, [ref, setStateFn]);
 }
 
 export default useCanvasHandler;

@@ -21,13 +21,10 @@ function FormStepThree() {
 
   const { setIsVehDamageCanvasSave } = useLogicState();
 
-  useEffect(
-    function () {
-      setIsVehDamageCanvasSave(true);
-      return setIsVehDamageCanvasSave(false);
-    },
-    [setIsVehDamageCanvasSave]
-  );
+  // let Next button make saving of canvas
+  useEffect(function () {
+    setIsVehDamageCanvasSave(true);
+  }, []);
 
   return (
     <div className={`${styles.form}`}>
@@ -91,13 +88,6 @@ function FormStepThree() {
           onChangeSet={setTpDamageDetails}
         />
       </fieldset>
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-        }}
-      >
-        SAVE
-      </button>
     </div>
   );
 }

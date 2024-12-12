@@ -7,7 +7,7 @@ import {
 } from "react";
 import { CanvasType } from "../types/forms/CanvasType";
 import CanvasDraw from "react-canvas-draw";
-import useCanvasHandler from "../hooks/useCanvasHandler";
+import SignatureCanvas from "react-signature-canvas";
 
 const CanvasContext = createContext<CanvasType | null>(null);
 
@@ -22,9 +22,12 @@ function CanvasProvider({ children }: PropsWithChildren) {
   const driverVehCanvasRef = useRef<CanvasDraw | null>(null);
   const tpVehCanvasRef = useRef<CanvasDraw | null>(null);
 
-  // handle Canvas Damage vehicles and pass it for saving canvas
-  const handleDriverDamageCanvas = useCanvasHandler(setDriverDamageVeh);
-  const handleTpDamageCanvas = useCanvasHandler(setTpDamageVeh);
+  //get canvas html elements for schema
+  const schemaBeforeCanvasRef = useRef<CanvasDraw | null>(null);
+  const schemaAfterCanvasRef = useRef<CanvasDraw | null>(null);
+
+  //get canvas html elements for signature
+  const signatureRef = useRef<SignatureCanvas | null>(null);
 
   return (
     <CanvasContext.Provider
@@ -36,13 +39,14 @@ function CanvasProvider({ children }: PropsWithChildren) {
         driverSignature,
         driverVehCanvasRef,
         tpVehCanvasRef,
+        schemaBeforeCanvasRef,
+        schemaAfterCanvasRef,
+        signatureRef,
         setDriverDamageVeh,
         setTpDamageVeh,
         setSchemeBeforeAccident,
         setSchemeAfterAccident,
         setDriverSignature,
-        handleDriverDamageCanvas,
-        handleTpDamageCanvas,
       }}
     >
       {children}

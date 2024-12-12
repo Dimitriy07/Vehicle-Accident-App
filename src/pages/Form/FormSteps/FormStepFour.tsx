@@ -1,22 +1,68 @@
-import { useFormContext } from "../../../context/FormContext";
-import FormInput from "../../../components/FormInput/FormInput";
+import { useEffect } from "react";
+import useWindowWidth from "../../../hooks/useWindowWidth";
+import { useCanvas } from "../../../context/CanvasContext";
+
+import CanvasDraw from "react-canvas-draw";
+
 import styles from "../Form.module.css";
+import { useLogicState } from "../../../context/LogicStateContext";
 
 function FormStepFour() {
-  const { driverStatement, setDriverStatement } = useFormContext();
+  const { setIsSchemaCanvasSave } = useLogicState();
+  const {
+    schemeBeforeAccident,
+    schemeAfterAccident,
+    schemaBeforeCanvasRef,
+    schemaAfterCanvasRef,
+  } = useCanvas();
+  const [windowWidth] = useWindowWidth();
+
+  useEffect(function () {
+    setIsSchemaCanvasSave(true);
+  }, []);
+
   return (
     <div className={`${styles.form}`}>
-      <div>
-        <FormInput
-          type="textarea"
-          rows={10}
-          cols={50}
-          label=" Driver's Statement(Please explain fully and clearly what
-    happened)"
-          value={driverStatement}
-          onChangeSet={setDriverStatement}
-        />
-      </div>
+      <label>Draw Scheme Before Accident</label>
+      <CanvasDraw
+        ref={schemaBeforeCanvasRef}
+        canvasWidth={windowWidth - 20}
+        canvasHeight={250}
+        brushColor="#000"
+        brushRadius={2}
+        lazyRadius={1}
+        hideInterface={false}
+        style={{ border: "1px solid #ccc", borderRadius: "8px" }}
+        saveData={schemeBeforeAccident}
+      />
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          schemaBeforeCanvasRef.current?.clear();
+        }}
+      >
+        Clear
+      </button>
+      <label>Draw Scheme After Accident</label>
+      <CanvasDraw
+        ref={schemaAfterCanvasRef}
+        canvasWidth={windowWidth - 20}
+        canvasHeight={250}
+        brushColor="#000"
+        brushRadius={2}
+        lazyRadius={1}
+        hideInterface={false}
+        style={{ border: "1px solid #ccc", borderRadius: "8px" }}
+        saveData={schemeAfterAccident}
+      />
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          schemaAfterCanvasRef.current?.clear();
+        }}
+      >
+        Clear
+      </button>
     </div>
   );
 }

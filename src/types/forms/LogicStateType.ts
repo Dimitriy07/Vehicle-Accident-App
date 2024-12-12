@@ -8,6 +8,7 @@ export interface LogicStateType {
   isDriverFormStarts: boolean;
   isVehDamageCanvasSave: boolean;
   isSchemaCanvasSave: boolean;
+  isDriverSignature: boolean;
   setIsStartAccident: (value: boolean) => void;
   setIsPhotoDetailsDone: (value: boolean) => void;
   setIsTpDetailsDone: (value: boolean) => void;
@@ -17,4 +18,5 @@ export interface LogicStateType {
   setIsDriverFormStarts: (value: boolean) => void;
   setIsVehDamageCanvasSave: (value: boolean) => void;
   setIsSchemaCanvasSave: (value: boolean) => void;
+  setIsDriverSignature: (value: boolean) => void;
 }
