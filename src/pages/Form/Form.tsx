@@ -29,6 +29,7 @@ function Form() {
     setIsDriverFormStarts,
     setIsVehDamageCanvasSave,
     setIsSchemaCanvasSave,
+    setIsDriverSignature
   } = useLogicState();
 
   const {
@@ -138,6 +139,7 @@ function Form() {
             if (isSchemaCanvasSave) {
               handleSchemeCanvas();
             }
+            if (isDriverSignature){setIsDriverSignature(false);}
           }}
         >
           Back
@@ -157,6 +159,7 @@ function Form() {
               if (isDriverSignature) {
                 saveDriverSignature();
                 generatePDF(data);
+                setIsDriverSignature(false);
                 navigate("/steps-nav", { replace: true });
               }
             }}

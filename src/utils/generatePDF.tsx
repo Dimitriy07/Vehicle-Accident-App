@@ -55,8 +55,8 @@ function addImageWithPlaceholder(
   title: string,
   image: string | null,
   y: number,
-  width = 180,
-  height = 80
+  width = 80,
+  height = 50
 ): number {
   doc.setFontSize(12);
   doc.setFont("helvetica", "bold");
@@ -73,7 +73,46 @@ function addImageWithPlaceholder(
   }
   return y + height + 10;
 }
+function addPairImageWithPlaceholder(
+  doc: jsPDF,
+  title1: string,
+  image1: string | null,
+  title2: string,
+  image2: string | null,
+  y: number,
+  width = 80,
+  height = 50
+): number {
+  doc.setFontSize(12);
+  doc.setFont("helvetica", "bold");
+  doc.text(title1, 10, y);
+  y += 5;
 
+  if (image1) {
+    doc.addImage(image1, "PNG", 10, y, width, height);
+  } else {
+    doc.setFontSize(10);
+    doc.setFont("helvetica", "normal");
+    doc.text("No image provided", 10, y + height / 2);
+    doc.rect(10, y, width, height);
+  }
+y-=5;
+
+  doc.setFontSize(12);
+  doc.setFont("helvetica", "bold");
+  doc.text(title2, 110, y);
+  y += 5;
+
+  if (image2) {
+    doc.addImage(image2, "PNG", 110, y, width, height);
+  } else {
+    doc.setFontSize(10);
+    doc.setFont("helvetica", "normal");
+    doc.text("No image provided", 110, y + height / 2);
+    doc.rect(110, y, width, height);
+  }
+  return y + height + 10;
+}
 // Main function to generate the PDF
 export function generatePDF(formData: any) {
   const doc = new jsPDF();
@@ -96,7 +135,7 @@ export function generatePDF(formData: any) {
   yPos = addFieldPair(
     doc,
     "Date of Accident",
-    formData.date || "N/A",
+    formData.date.toString() || "N/A",
     "Time of Accident",
     formData.time || "N/A",
     yPos
@@ -166,14 +205,17 @@ export function generatePDF(formData: any) {
     formData.tpVehicleMake || "N/A",
     yPos
   );
-
+  yPos = addSectionHeader(doc, "Damage Descriptions", yPos);
+  yPos = addPairImageWithPlaceholder(doc,"Driver Vehicle Damage",formData.driverDamageCanvas || null,  
+  "Third-Party Vehicle Damage",
+  formData.tpDamageCanvas || null,
+  yPos)
+  
   // Damage Descriptions with Background Image Placeholders
   doc.addPage();
-  if (yPos > 200) {
-    doc.addPage();
-    yPos = 20;
-  }
-  yPos = addSectionHeader(doc, "Damage Descriptions", yPos);
+  yPos = 20;
+
+
   yPos = addImageWithPlaceholder(
     doc,
     "Driver Vehicle Damage",
