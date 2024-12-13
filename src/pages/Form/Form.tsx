@@ -3,9 +3,11 @@ import { useNavigate } from "react-router";
 import { useFormContext } from "../../context/FormContext";
 
 import { useLogicState } from "../../context/LogicStateContext";
+import { useCanvas } from "../../context/CanvasContext";
+import useCanvasHandler from "../../hooks/useCanvasHandler";
+import { generatePDF } from "../../utils/generatePDF";
 
 import Button from "../../components/Button/Button";
-
 import FormStepOne from "./FormSteps/FormStepOne";
 import FormStepTwo from "./FormSteps/FormStepTwo";
 import FormStepThree from "./FormSteps/FormStepThree";
@@ -14,8 +16,7 @@ import FormStepFive from "./FormSteps/FormStepFive";
 import FormStepSix from "./FormSteps/FormStepSix";
 
 import styles from "./Form.module.css";
-import { useCanvas } from "../../context/CanvasContext";
-import useCanvasHandler from "../../hooks/useCanvasHandler";
+import { useContextData } from "../../hooks/useContextData";
 
 function Form() {
   const { STEPS_NUMBERS, formStep, setFormStep } = useFormContext();
@@ -42,6 +43,8 @@ function Form() {
     setSchemeAfterAccident,
     setDriverSignature,
   } = useCanvas();
+
+  const data = useContextData();
 
   const navigate = useNavigate();
 
@@ -151,7 +154,11 @@ function Form() {
               if (isSchemaCanvasSave) {
                 handleSchemeCanvas();
               }
-              if (isDriverSignature) saveDriverSignature();
+              if (isDriverSignature) {
+                saveDriverSignature();
+                generatePDF(data);
+                navigate("/steps-nav", { replace: true });
+              }
             }}
           >
             {formStep === STEPS_NUMBERS ? "Submit" : "Next"}
