@@ -7,6 +7,7 @@ function FormProvider({ children }: PropsWithChildren) {
   /////// Driver's Form Details
 
   const [isInjury, setIsInjury] = useState("no");
+  const [injuryDetails, setInjuryDetails] = useState("");
   const [formStep, setFormStep] = useState(1);
   const [isWitness, setIsWitness] = useState("no");
   const [witnessName, setWitnessName] = useState("");
@@ -18,12 +19,11 @@ function FormProvider({ children }: PropsWithChildren) {
   const [accidentDate, setAccidentDate] = useState(new Date());
   const [accidentTime, setAccidentTime] = useState("");
   const [accidentLocation, setAccidentLocation] = useState("");
-  const [weatherCondition, setWeatherCondition] = useState("");
-  const [roadCondition, setRoadCondition] = useState("");
+  const [weatherCondition, setWeatherCondition] = useState("clear");
+  const [roadCondition, setRoadCondition] = useState("good");
   const [driverSpeed, setDriverSpeed] = useState("");
   const [tpSpeed, setTpSpeed] = useState("");
   const [driverDamageDetails, setDriverDamageDetails] = useState("");
-
   const [tpDamageDetails, setTpDamageDetails] = useState("");
   const [driverStatement, setDriverStatement] = useState("");
 
@@ -39,6 +39,7 @@ function FormProvider({ children }: PropsWithChildren) {
         witnessAddress,
         isPolice,
         isInjury,
+        injuryDetails,
         STEPS_NUMBERS,
 
         policeName,
@@ -61,7 +62,7 @@ function FormProvider({ children }: PropsWithChildren) {
         setWitnessAddress,
         setIsPolice,
         setIsInjury,
-
+        setInjuryDetails,
         setPoliceName,
         setPoliceStattion,
         setPoliceRefN,

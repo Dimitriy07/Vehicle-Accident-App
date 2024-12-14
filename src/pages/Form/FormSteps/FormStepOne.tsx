@@ -8,6 +8,7 @@ function FormStepOne() {
     witnessName,
     witnessAddress,
     isInjury,
+    injuryDetails,
     isPolice,
     policeName,
     policeStattion,
@@ -17,6 +18,7 @@ function FormStepOne() {
     setWitnessAddress,
     setIsPolice,
     setIsInjury,
+    setInjuryDetails,
     setPoliceName,
     setPoliceStattion,
     setPoliceRefN,
@@ -36,10 +38,14 @@ function FormStepOne() {
         />
 
         {isInjury === "yes" && (
-          <>
-            <label>Details of infury</label>
-            <textarea rows={5} cols={50}></textarea>
-          </>
+          <FormInput
+            type="textarea"
+            rows={10}
+            cols={50}
+            label="Details of infury"
+            value={injuryDetails}
+            onChangeSet={setInjuryDetails}
+          />
         )}
         <FormInput
           type="select"

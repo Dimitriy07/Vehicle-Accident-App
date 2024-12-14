@@ -1,0 +1,59 @@
+.infoContainer {
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border: 0.1rem solid #ccc;
+  border-radius: 0.8rem;
+  line-height: 1.8;
+  color: #333;
+  max-width: 100%;
+  margin: 2rem auto;
+}
+
+.title {
+  font-size: 2.4rem; /* 24px */
+  font-weight: bold;
+  color: #003366;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.section {
+  margin-bottom: 2rem;
+}
+
+.section p {
+  font-size: 2rem;
+  font-weight: bold;
+}
+.heading {
+  font-size: 2rem; /* 20px */
+  font-weight: bold;
+  color: #004080;
+  border-bottom: 0.2rem solid #0077cc;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.subheading {
+  font-size: 1.8rem; /* 18px */
+  font-weight: bold;
+  color: #005599;
+  margin-top: 1rem;
+}
+
+.list {
+  margin: 1rem 0 0 2rem;
+  font-size: 1.6rem; /* 16px */
+}
+
+.sublist {
+  margin-left: 2rem;
+}
+
+.footer {
+  font-size: 1.4rem; /* 14px */
+  font-style: italic;
+  text-align: center;
+  margin-top: 2rem;
+  color: #555;
+}

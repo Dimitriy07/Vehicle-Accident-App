@@ -7,14 +7,16 @@ import { Link } from "react-router-dom";
 function ButtonContainer(): JSX.Element {
   return (
     <div className={styles.buttonContainerConfig}>
-      <Link to="info">
+      <Link to="settings">
         <ButtonIcon>
           <IconSettings />
         </ButtonIcon>
       </Link>
-      <ButtonIcon>
-        <IconInfo />
-      </ButtonIcon>
+      <Link to="info">
+        <ButtonIcon>
+          <IconInfo />
+        </ButtonIcon>
+      </Link>
     </div>
   );
 }

@@ -7,7 +7,7 @@ export interface FormContextType {
   witnessAddress: string;
   isPolice: string;
   isInjury: string;
-
+  injuryDetails: string;
   policeName: string;
   policeStattion: string;
   policeRefN: string;
@@ -28,7 +28,7 @@ export interface FormContextType {
   setWitnessAddress: (value: string) => void;
   setIsPolice: (value: string) => void;
   setIsInjury: (value: string) => void;
-
+  setInjuryDetails: (value: string) => void;
   setPoliceName: (value: string) => void;
   setPoliceStattion: (value: string) => void;
   setPoliceRefN: (value: string) => void;

@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import MainScreen from "./pages/MainScreen/MainScreen";
-import Info from "./pages/Info/Info";
+import Info from "./pages/InfoSection/InfoSection";
 import StepsNavigation from "./pages/StepsNavigation/StepsNavigation";
 
 import PhotoDetails from "./pages/PhotoDetails/PhotoDetails";
@@ -19,6 +19,7 @@ import { TpDetailsProvider } from "./context/TpDetailsContext";
 import { CanvasProvider } from "./context/CanvasContext";
 import { VehicleProvider } from "./context/VehicleContext";
 import { GeolocationProvider } from "./context/GeolocationContext";
+import SettingsPage from "./pages/SettingsSection/SettingsSection";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
                     <BrowserRouter>
                       <Routes>
                         <Route path="/" element={<MainScreen />} />
+                        <Route path="settings" element={<SettingsPage />} />
                         <Route path="info" element={<Info />} />
                         <Route path="steps-nav" element={<StepsNavigation />} />
                         <Route

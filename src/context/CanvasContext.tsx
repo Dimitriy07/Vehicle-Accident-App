@@ -13,9 +13,13 @@ const CanvasContext = createContext<CanvasType | null>(null);
 
 function CanvasProvider({ children }: PropsWithChildren) {
   const [driverDamageVeh, setDriverDamageVeh] = useState("");
+  const [driverDamageVehUrl, setDriverDamageVehUrl] = useState("");
   const [tpDamageVeh, setTpDamageVeh] = useState("");
+  const [tpDamageVehUrl, setTpDamageVehUrl] = useState("");
   const [schemeBeforeAccident, setSchemeBeforeAccident] = useState("");
+  const [schemeBeforeAccidentUrl, setSchemeBeforeAccidentUrl] = useState("");
   const [schemeAfterAccident, setSchemeAfterAccident] = useState("");
+  const [schemeAfterAccidentUrl, setSchemeAfterAccidentUrl] = useState("");
   const [driverSignature, setDriverSignature] = useState("");
 
   //get canvas html elements for damages
@@ -33,9 +37,13 @@ function CanvasProvider({ children }: PropsWithChildren) {
     <CanvasContext.Provider
       value={{
         driverDamageVeh,
+        driverDamageVehUrl,
         tpDamageVeh,
+        tpDamageVehUrl,
         schemeBeforeAccident,
+        schemeBeforeAccidentUrl,
         schemeAfterAccident,
+        schemeAfterAccidentUrl,
         driverSignature,
         driverVehCanvasRef,
         tpVehCanvasRef,
@@ -43,9 +51,13 @@ function CanvasProvider({ children }: PropsWithChildren) {
         schemaAfterCanvasRef,
         signatureRef,
         setDriverDamageVeh,
+        setDriverDamageVehUrl,
         setTpDamageVeh,
+        setTpDamageVehUrl,
         setSchemeBeforeAccident,
+        setSchemeBeforeAccidentUrl,
         setSchemeAfterAccident,
+        setSchemeAfterAccidentUrl,
         setDriverSignature,
       }}
     >

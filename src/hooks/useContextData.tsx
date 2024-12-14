@@ -8,11 +8,13 @@ import { useVehicle } from "../context/VehicleContext";
 
 export function useContextData() {
   const canvasContext = useCanvas();
-  const driverContext = useDriver();
+  const { getSelectedItem: getSelectedDriver } = useDriver();
+  const { getSelectedItem: getSelectedVehicle } = useVehicle();
   const formContext = useFormContext();
   const geolocationContext = useGeolocation();
   const tpDetailsContext = useTpDetails();
-  const vehicleContext = useVehicle();
+  const vehicleContext = getSelectedVehicle();
+  const driverContext = getSelectedDriver();
 
   const dataObj = {
     ...canvasContext,

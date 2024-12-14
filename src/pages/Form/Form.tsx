@@ -29,7 +29,7 @@ function Form() {
     setIsDriverFormStarts,
     setIsVehDamageCanvasSave,
     setIsSchemaCanvasSave,
-    setIsDriverSignature
+    setIsDriverSignature,
   } = useLogicState();
 
   const {
@@ -40,8 +40,12 @@ function Form() {
     signatureRef,
     setDriverDamageVeh,
     setTpDamageVeh,
+    setTpDamageVehUrl,
+    setDriverDamageVehUrl,
     setSchemeBeforeAccident,
+    setSchemeBeforeAccidentUrl,
     setSchemeAfterAccident,
+    setSchemeAfterAccidentUrl,
     setDriverSignature,
   } = useCanvas();
 
@@ -68,16 +72,23 @@ function Form() {
   // to use conditionally useCanvasHandler in button
   const saveDriverDamageCanvas = useCanvasHandler(
     driverVehCanvasRef,
-    setDriverDamageVeh
+    setDriverDamageVeh,
+    setDriverDamageVehUrl
   );
-  const saveTpDamageCanvas = useCanvasHandler(tpVehCanvasRef, setTpDamageVeh);
+  const saveTpDamageCanvas = useCanvasHandler(
+    tpVehCanvasRef,
+    setTpDamageVeh,
+    setTpDamageVehUrl
+  );
   const saveSchemeBeforeAccident = useCanvasHandler(
     schemaBeforeCanvasRef,
-    setSchemeBeforeAccident
+    setSchemeBeforeAccident,
+    setSchemeBeforeAccidentUrl
   );
   const saveSchemeAfterAccident = useCanvasHandler(
     schemaAfterCanvasRef,
-    setSchemeAfterAccident
+    setSchemeAfterAccident,
+    setSchemeAfterAccidentUrl
   );
 
   const saveDriverSignature = useCanvasHandler(
@@ -139,7 +150,9 @@ function Form() {
             if (isSchemaCanvasSave) {
               handleSchemeCanvas();
             }
-            if (isDriverSignature){setIsDriverSignature(false);}
+            if (isDriverSignature) {
+              setIsDriverSignature(false);
+            }
           }}
         >
           Back
