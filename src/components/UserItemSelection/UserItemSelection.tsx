@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import styles from "./UserItemSelection.module.css";
 
 interface UserItemSelectionProps<T> {
@@ -15,6 +16,7 @@ function UserItemSelection<
   arr,
   itemId,
 }: UserItemSelectionProps<T>): JSX.Element | null {
+  const { t } = useTranslation();
   if (!arr) return null;
 
   return (
@@ -27,7 +29,7 @@ function UserItemSelection<
       >
         {!itemId && (
           <option value="" disabled hidden>
-            {`Choose ${children.toLowerCase()}`}
+            {`${t("itemSelection.choose")} ${children.toLowerCase()}`}
           </option>
         )}
         {arr.map((item) => (

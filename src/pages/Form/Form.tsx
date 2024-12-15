@@ -5,7 +5,6 @@ import { useFormContext } from "../../context/FormContext";
 import { useLogicState } from "../../context/LogicStateContext";
 import { useCanvas } from "../../context/CanvasContext";
 import useCanvasHandler from "../../hooks/useCanvasHandler";
-import { generatePDF } from "../../utils/generatePDF";
 
 import Button from "../../components/Button/Button";
 import FormStepOne from "./FormSteps/FormStepOne";
@@ -16,7 +15,8 @@ import FormStepFive from "./FormSteps/FormStepFive";
 import FormStepSix from "./FormSteps/FormStepSix";
 
 import styles from "./Form.module.css";
-import { useContextData } from "../../hooks/useContextData";
+
+import { useTranslation } from "react-i18next";
 
 function Form() {
   const { STEPS_NUMBERS, formStep, setFormStep } = useFormContext();
@@ -49,10 +49,9 @@ function Form() {
     setDriverSignature,
   } = useCanvas();
 
-  const data = useContextData();
-
   const navigate = useNavigate();
 
+  const { t } = useTranslation();
   useEffect(
     function () {
       setIsDriverFormStarts(true);
@@ -108,6 +107,11 @@ function Form() {
     setIsSchemaCanvasSave(false);
   }
 
+  function handleSignedForm() {
+    saveDriverSignature();
+
+    navigate("/steps-nav", { replace: true });
+  }
   // Change isStepsDone = true condition in <form></form> and button while developing (change back for production)
   return (
     <div className="container-input__form">
@@ -155,7 +159,7 @@ function Form() {
             }
           }}
         >
-          Back
+          {t("actions.back")}
         </Button>
         {!isStepsDone ? (
           <div></div>
@@ -170,14 +174,13 @@ function Form() {
                 handleSchemeCanvas();
               }
               if (isDriverSignature) {
-                saveDriverSignature();
-                generatePDF(data);
-                setIsDriverSignature(false);
-                navigate("/steps-nav", { replace: true });
+                handleSignedForm();
               }
             }}
           >
-            {formStep === STEPS_NUMBERS ? "Submit" : "Next"}
+            {formStep === STEPS_NUMBERS
+              ? t("actions.submit")
+              : t("actions.next")}
           </Button>
         )}
       </div>

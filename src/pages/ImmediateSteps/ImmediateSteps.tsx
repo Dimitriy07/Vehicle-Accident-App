@@ -10,6 +10,7 @@ import { createHtmlFromData } from "../../utils/createHtmlForm";
 
 import Button from "../../components/Button/Button";
 import { useTpDetails } from "../../context/TpDetailsContext";
+import { useTranslation } from "react-i18next";
 
 function ImmediateSteps() {
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ function ImmediateSteps() {
   } = useLogicState();
   const { tpFormData } = useTpDetails();
 
+  const { t } = useTranslation();
   useEffect(() => {
     setIsStepsStarts(true);
   }, [setIsStepsStarts]);
@@ -61,7 +63,7 @@ function ImmediateSteps() {
               isPhotoDetailsDone ? "checked" : ""
             }`}
           >
-            Photos
+            {t("immediateSteps.photos")}
           </Link>
         </li>
         <li>
@@ -71,7 +73,7 @@ function ImmediateSteps() {
               isTpDetailsDone ? "checked" : ""
             }`}
           >
-            TP Details
+            {t("immediateSteps.tpDetails")}
           </Link>
         </li>
         <li>
@@ -81,7 +83,7 @@ function ImmediateSteps() {
               isCallManagerDone ? "checked" : ""
             }`}
           >
-            Call Manager
+            {t("immediateSteps.callManager")}
           </Link>
         </li>
         <li>
@@ -91,7 +93,7 @@ function ImmediateSteps() {
 
       <div className="btn-container">
         <Button onClick={() => navigate("/steps-nav", { replace: true })}>
-          Back
+          {t("actions.back")}
         </Button>
         <Button
           onClick={() => {
@@ -100,7 +102,7 @@ function ImmediateSteps() {
             navigate("/steps-nav", { replace: true });
           }}
         >
-          Submit
+          {t("actions.submit")}
         </Button>
       </div>
     </div>

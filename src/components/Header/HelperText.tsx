@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useDriver } from "../../context/DriverContext";
 
 import { useLogicState } from "../../context/LogicStateContext";
@@ -16,20 +17,21 @@ function HelperText() {
     isStepsDone,
     isDriverFormStarts,
   } = useLogicState();
+  const { t } = useTranslation();
 
   // Helper function to determine the message
   const getHelperMessage = () => {
-    if (!driverId) return "Choose Driver Name";
-    if (!vehicleId) return "Choose Vehicle Name";
+    if (!driverId) return t("helperText.isDriver");
+    if (!vehicleId) return t("helperText.isVehicle");
 
-    if (!isStartAccident) return "Start Accident Form";
-    if (!isStepsStarts) return "Go to Immediate Steps";
-    if (!isPhotoDetailsDone) return "Go To Photos";
-    if (!isTpDetailsDone) return "Go To TP Details";
-    if (!isCallManagerDone) return "Call Manager";
-    if (!isStepsDone) return "Press Submit";
-    if (!isDriverFormStarts && isStepsDone) return "Go To Form";
-    if (isDriverFormStarts) return "Form Progress:";
+    if (!isStartAccident) return t("helperText.isStartAccidentForm");
+    if (!isStepsStarts) return t("helperText.isImmediatteSteps");
+    if (!isPhotoDetailsDone) return t("helperText.isPhotos");
+    if (!isTpDetailsDone) return t("helperText.isTpDetails");
+    if (!isCallManagerDone) return t("helperText.isCallManager");
+    if (!isStepsDone) return t("helperText.isPressSubmit");
+    if (!isDriverFormStarts && isStepsDone) return t("helperText.isForm");
+    if (isDriverFormStarts) return t("helperText.isFormProgress");
   };
 
   return (

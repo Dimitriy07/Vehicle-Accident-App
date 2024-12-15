@@ -5,24 +5,26 @@ import { useLogicState } from "../../context/LogicStateContext";
 import Button from "../../components/Button/Button";
 
 import styles from "./PhotoDetails.module.css";
+import { useTranslation } from "react-i18next";
 
 function PictureDetails() {
   const navigate = useNavigate();
   const { setIsPhotoDetailsDone } = useLogicState();
+  const { t } = useTranslation();
   return (
     <div className={`${styles.photoDetails} ${styles.containerDisplayPhoto}`}>
       <ul>
-        <li>Take Photos from all the angles(at least 15)</li>
-        <li>Take Photos inside the vehicle (how many passangers inside)</li>
-        <li>Take Photo of incoming and outgoing street</li>
+        <li>{t("photos.photoExplanation1")}</li>
+        <li>{t("photos.photoExplanation2")}</li>
+        <li>{t("photos.photoExplanation3")}</li>
       </ul>
       <div>
-        <h2>Example of photos to be taken:</h2>
+        <h2>{t("photos.photoExamples")}</h2>
         <img src="/accident_photo.jpg" alt="Accident photo Example" />
       </div>
       <div className="btn-container">
         <Button onClick={() => navigate("/steps-nav/steps", { replace: true })}>
-          Back
+          {t("actions.back")}
         </Button>
         <Button
           onClick={() => {
@@ -30,7 +32,7 @@ function PictureDetails() {
             navigate("/steps-nav/steps", { replace: true });
           }}
         >
-          Done
+          {t("actions.done")}
         </Button>
       </div>
     </div>

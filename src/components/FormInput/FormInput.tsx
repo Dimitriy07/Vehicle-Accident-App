@@ -1,5 +1,10 @@
 import styles from "./FormInput.module.css";
 
+interface OptionType {
+  value: string;
+  label?: string;
+}
+
 interface FormInputProps {
   type: string;
   value: string | Date;
@@ -7,7 +12,7 @@ interface FormInputProps {
   onChangeSetDate?: (value: Date) => void;
   placeholder?: string;
   label?: string;
-  options?: string[];
+  options?: OptionType[];
   inputName?: string;
   rows?: number;
   cols?: number;
@@ -38,8 +43,15 @@ function FormInput({
           name={inputName}
         >
           {options?.map((option) => (
-            <option className={styles.option} key={option} value={option}>
-              {option.replace(option[0], option[0].toUpperCase())}
+            <option
+              className={styles.option}
+              key={option.value}
+              value={option.value}
+            >
+              {option.label?.replace(
+                option.label[0],
+                option.label[0].toUpperCase()
+              )}
             </option>
           ))}
         </select>

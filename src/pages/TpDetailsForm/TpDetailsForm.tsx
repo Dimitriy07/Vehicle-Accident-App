@@ -6,6 +6,7 @@ import FormInput from "../../components/FormInput/FormInput";
 import styles from "./TpDetailsForm.module.css";
 import { useLogicState } from "../../context/LogicStateContext";
 import { useTpDetails } from "../../context/TpDetailsContext";
+import { useTranslation } from "react-i18next";
 
 function TpDetailsForm() {
   const navigate = useNavigate();
@@ -41,7 +42,7 @@ function TpDetailsForm() {
   } = useTpDetails();
 
   const { setIsTpDetailsDone } = useLogicState();
-
+  const { t } = useTranslation();
   function handleSaveForm() {
     if (tpRef.current) {
       const formData = new FormData(tpRef.current);
@@ -72,64 +73,72 @@ function TpDetailsForm() {
         />
         <FormInput type="hidden" value="Test" inputName="from_name" />
         <FormInput type="hidden" value={message} inputName="from_message" />
+
+        {/*  */}
         <FormInput
           type="select"
-          label="Is Vehicle Involved"
+          label={t("tpDetails.isVehInvolved")}
           value={isVehInvolved}
           onChangeSet={setIsVehInvolved}
-          options={["yes", "no"]}
+          options={[
+            { value: "no", label: t("commonAnswers.no") },
+            { value: "yes", label: t("commonAnswers.yes") },
+          ]}
         />
         {isVehInvolved === "yes" ? (
           <>
             <fieldset>
-              <legend>TP Vehicle information</legend>
+              <legend>{t("tpDetails.tpVehTitle")}</legend>
               <FormInput
                 type="input-text"
-                placeholder="Reg N"
+                placeholder={t("tpDetails.tpRegNumber")}
                 value={tpRegNumber}
                 onChangeSet={setTpRegNumber}
               />
 
               <FormInput
                 type="input-text"
-                placeholder="Make"
+                placeholder={t("tpDetails.tpMake")}
                 value={tpMake}
                 onChangeSet={setTpMake}
               />
               <FormInput
                 type="input-text"
-                placeholder="Model"
+                placeholder={t("tpDetails.tpModel")}
                 value={tpModel}
                 onChangeSet={setTpModel}
               />
             </fieldset>
             <fieldset>
-              <legend>TP Driver/Owner information</legend>
+              <legend>{t("tpDetails.tpDriverOwnerTitle")}</legend>
               <FormInput
                 type="select"
-                label="Is Driver owner of the vehicle"
+                label={t("tpDetails.isTpDriverOwner")}
                 value={isTpDriverOwner}
                 onChangeSet={setTpIsDriverOwner}
-                options={["yes", "no"]}
+                options={[
+                  { value: "no", label: t("commonAnswers.no") },
+                  { value: "yes", label: t("commonAnswers.yes") },
+                ]}
               />
 
               {isTpDriverOwner !== "yes" && (
                 <>
                   <FormInput
                     type="input-text"
-                    placeholder="Owner's Name"
+                    placeholder={t("tpDetails.tpOwnerName")}
                     value={tpOwnerName}
                     onChangeSet={setTpOwnerName}
                   />
                   <FormInput
                     type="input-text"
-                    placeholder="Owner's Telephone"
+                    placeholder={t("tpDetails.tpOwnerTelephone")}
                     value={tpOwnerTelephone}
                     onChangeSet={setTpOwnerTelephone}
                   />
                   <FormInput
                     type="input-text"
-                    placeholder="Owner's Address"
+                    placeholder={t("tpDetails.tpOwnerAddress")}
                     value={tpOwnerAddress}
                     onChangeSet={setTpOwnerAddress}
                   />
@@ -138,31 +147,31 @@ function TpDetailsForm() {
 
               <FormInput
                 type="input-text"
-                placeholder="Driver's Name"
+                placeholder={t("tpDetails.tpDriverName")}
                 value={tpDriverName}
                 onChangeSet={setTpDriverName}
               />
               <FormInput
                 type="input-text"
-                placeholder="Driver's Telephone"
+                placeholder={t("tpDetails.tpDriverTelephone")}
                 value={tpDriverTelephone}
                 onChangeSet={setTpDriverTelephone}
               />
               <FormInput
                 type="input-text"
-                placeholder="Driver's Address"
+                placeholder={t("tpDetails.tpDriverAddress")}
                 value={tpDriverAddress}
                 onChangeSet={setTpDriverAddress}
               />
               <FormInput
                 type="input-text"
-                placeholder="Insurance Company"
+                placeholder={t("tpDetails.tpInsuranceCompany")}
                 value={tpInsuranceCompany}
                 onChangeSet={setTpInsuranceCompany}
               />
               <FormInput
                 type="input-text"
-                placeholder="Policy No"
+                placeholder={t("tpDetails.tpPolicyNo")}
                 value={tpPolicyNo}
                 onChangeSet={setTpPolicyNo}
               />
@@ -170,22 +179,22 @@ function TpDetailsForm() {
           </>
         ) : (
           <fieldset>
-            <legend>Third Party Details</legend>
+            <legend>{t("tpDetails.tpDetails")}</legend>
             <FormInput
               type="input-text"
-              placeholder="Name"
+              placeholder={t("tpDetails.tpName")}
               value={tpDriverName}
               onChangeSet={setTpDriverName}
             />
             <FormInput
               type="input-text"
-              placeholder="Telephone"
+              placeholder={t("tpDetails.tpTelephone")}
               value={tpDriverTelephone}
               onChangeSet={setTpDriverTelephone}
             />
             <FormInput
               type="input-text"
-              placeholder="Address"
+              placeholder={t("tpDetails.tpAddress")}
               value={tpDriverAddress}
               onChangeSet={setTpDriverAddress}
             />
@@ -194,7 +203,7 @@ function TpDetailsForm() {
       </form>
       <div className="btn-container">
         <Button onClick={() => navigate("/steps-nav/steps", { replace: true })}>
-          Back
+          {t("actions.back")}
         </Button>
         <Button
           onClick={() => {
@@ -203,7 +212,7 @@ function TpDetailsForm() {
             navigate("/steps-nav/steps", { replace: true });
           }}
         >
-          Submit
+          {t("actions.submit")}
         </Button>
       </div>
     </div>

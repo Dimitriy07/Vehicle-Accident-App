@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import FormInput from "../../../components/FormInput/FormInput";
 import { useFormContext } from "../../../context/FormContext";
 import styles from "../Form.module.css";
@@ -23,18 +24,21 @@ function FormStepOne() {
     setPoliceStattion,
     setPoliceRefN,
   } = useFormContext();
-
+  const { t } = useTranslation();
   return (
     <div className={`${styles.form}`}>
       <fieldset>
-        <legend>Injury/Witness/Police Details</legend>
+        <legend>{t("formInformation.additionalDetails")}</legend>
 
         <FormInput
           type="select"
-          label="Is Anyone Injured"
+          label={t("formInformation.isInjury")}
           value={isInjury}
           onChangeSet={setIsInjury}
-          options={["no", "yes"]}
+          options={[
+            { value: "no", label: t("commonAnswers.no") },
+            { value: "yes", label: t("commonAnswers.yes") },
+          ]}
         />
 
         {isInjury === "yes" && (
@@ -42,30 +46,33 @@ function FormStepOne() {
             type="textarea"
             rows={10}
             cols={50}
-            label="Details of infury"
+            label={t("formInformation.injuryDetails")}
             value={injuryDetails}
             onChangeSet={setInjuryDetails}
           />
         )}
         <FormInput
           type="select"
-          label="Is Any Witness"
+          label={t("formInformation.isWitness")}
           value={isWitness}
           onChangeSet={setIsWitness}
-          options={["no", "yes"]}
+          options={[
+            { value: "no", label: t("commonAnswers.no") },
+            { value: "yes", label: t("commonAnswers.yes") },
+          ]}
         />
 
         {isWitness === "yes" && (
           <>
             <FormInput
               type="input-text"
-              placeholder="Witness Name"
+              placeholder={t("formInformation.witnessName")}
               value={witnessName}
               onChangeSet={setWitnessName}
             />
             <FormInput
               type="input-text"
-              placeholder="Witness Address"
+              placeholder={t("formInformation.witnessAddress")}
               value={witnessAddress}
               onChangeSet={setWitnessAddress}
             />
@@ -73,29 +80,32 @@ function FormStepOne() {
         )}
         <FormInput
           type="select"
-          label="Is Police attanded"
+          label={t("formInformation.isPolice")}
           value={isPolice}
           onChangeSet={setIsPolice}
-          options={["no", "yes"]}
+          options={[
+            { value: "no", label: t("commonAnswers.no") },
+            { value: "yes", label: t("commonAnswers.yes") },
+          ]}
         />
 
         {isPolice === "yes" && (
           <>
             <FormInput
               type="input-text"
-              placeholder="Number and Name of the Officer"
+              placeholder={t("formInformation.policeName")}
               value={policeName}
               onChangeSet={setPoliceName}
             />
             <FormInput
               type="input-text"
-              placeholder="Station of Attending Officer"
+              placeholder={t("formInformation.policeStation")}
               value={policeStattion}
               onChangeSet={setPoliceStattion}
             />
             <FormInput
               type="input-text"
-              placeholder="Police reference No (if applicable)"
+              placeholder={t("formInformation.policeRefN")}
               value={policeRefN}
               onChangeSet={setPoliceRefN}
             />

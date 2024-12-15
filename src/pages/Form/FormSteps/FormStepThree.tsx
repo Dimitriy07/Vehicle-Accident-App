@@ -6,6 +6,7 @@ import styles from "../Form.module.css";
 import useWindowWidth from "../../../hooks/useWindowWidth";
 import { useEffect } from "react";
 import { useLogicState } from "../../../context/LogicStateContext";
+import { useTranslation } from "react-i18next";
 
 function FormStepThree() {
   const [windowWidth] = useWindowWidth();
@@ -21,6 +22,8 @@ function FormStepThree() {
 
   const { setIsVehDamageCanvasSave } = useLogicState();
 
+  const { t } = useTranslation();
+
   // let Next button make saving of canvas
   useEffect(function () {
     setIsVehDamageCanvasSave(true);
@@ -29,7 +32,7 @@ function FormStepThree() {
   return (
     <div className={`${styles.form}`}>
       <fieldset>
-        <legend>Your vehicle</legend>
+        <legend>{t("damageDescriptions.yourVehicle")}</legend>
 
         <CanvasDraw
           ref={driverVehCanvasRef}
@@ -46,20 +49,20 @@ function FormStepThree() {
             driverVehCanvasRef.current?.clear();
           }}
         >
-          Clear
+          {t("actions.clear")}
         </button>
         <FormInput
           type="textarea"
-          placeholder="Your Vehicle Damage Description"
+          placeholder={t("damageDescriptions.driverVehDamagePlaceholder")}
           rows={5}
           cols={30}
-          label="Details of damage (Your vehicle)"
+          label={t("damageDescriptions.driverDamageDetailsLabel")}
           value={driverDamageDetails}
           onChangeSet={setDriverDamageDetails}
         />
       </fieldset>
       <fieldset>
-        <legend>TP Vehcile</legend>
+        <legend>{t("damageDescriptions.tpVehicle")}</legend>
 
         <CanvasDraw
           ref={tpVehCanvasRef}
@@ -76,14 +79,14 @@ function FormStepThree() {
             tpVehCanvasRef.current?.clear();
           }}
         >
-          Clear
+          {t("actions.clear")}
         </button>
         <FormInput
           type="textarea"
-          placeholder="TP Vehicle Damage Description"
+          placeholder={t("damageDescriptions.tpVehDamagePlaceholder")}
           rows={5}
           cols={30}
-          label="Details of damage (Third party vehicle)"
+          label={t("damageDescriptions.tpDamageDetailsLabel")}
           value={tpDamageDetails}
           onChangeSet={setTpDamageDetails}
         />

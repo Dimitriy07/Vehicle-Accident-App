@@ -6,6 +6,7 @@ import CanvasDraw from "react-canvas-draw";
 
 import styles from "../Form.module.css";
 import { useLogicState } from "../../../context/LogicStateContext";
+import { useTranslation } from "react-i18next";
 
 function FormStepFour() {
   const { setIsSchemaCanvasSave } = useLogicState();
@@ -17,13 +18,14 @@ function FormStepFour() {
   } = useCanvas();
   const [windowWidth] = useWindowWidth();
 
+  const { t } = useTranslation();
   useEffect(function () {
     setIsSchemaCanvasSave(true);
   }, []);
 
   return (
     <div className={`${styles.form}`}>
-      <label>Draw Scheme Before Accident</label>
+      <label>{t("accidentDiagrams.beforeImpact")}</label>
       <CanvasDraw
         ref={schemaBeforeCanvasRef}
         canvasWidth={windowWidth - 20}
@@ -41,9 +43,9 @@ function FormStepFour() {
           schemaBeforeCanvasRef.current?.clear();
         }}
       >
-        Clear
+        {t("actions.clear")}
       </button>
-      <label>Draw Scheme After Accident</label>
+      <label>{t("accidentDiagrams.afterImpact")}</label>
       <CanvasDraw
         ref={schemaAfterCanvasRef}
         canvasWidth={windowWidth - 20}
@@ -61,7 +63,7 @@ function FormStepFour() {
           schemaAfterCanvasRef.current?.clear();
         }}
       >
-        Clear
+        {t("actions.clear")}
       </button>
     </div>
   );

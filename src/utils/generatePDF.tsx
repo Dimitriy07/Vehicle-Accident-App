@@ -218,6 +218,10 @@ export const generatePDF = (formData: any) => {
     y = addField(doc, "Owner Address", formData.tpOwnerAddress, y);
   }
 
+  // Driver's Statement and Signature
+  y = addSectionHeader(doc, "Driver's Statement", y);
+  y = addField(doc, "Statement", formData.driverStatement, y + 5, 10, 50, 130);
+
   // Damage Descriptions with Background Image
   doc.addPage();
   y = addSectionHeader(doc, "Damage Descriptions", 20);
@@ -239,7 +243,7 @@ export const generatePDF = (formData: any) => {
     doc,
     "Driver Vehicle Damage Details",
     formData.driverDamageDetails,
-    "Third-Party Vehicle Damage Details",
+    "TP Vehicle Damage Details",
     formData.tpDamageDetails,
     y
   );
@@ -256,10 +260,6 @@ export const generatePDF = (formData: any) => {
     formData.schemeAfterAccidentUrl,
     y
   );
-
-  // Driver's Statement and Signature
-  y = addSectionHeader(doc, "Driver's Statement", y);
-  y = addField(doc, "Statement", formData.driverStatement, y + 5, 10, 50, 130);
 
   // Injury information
   if (

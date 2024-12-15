@@ -4,12 +4,19 @@ import { Link, useNavigate } from "react-router-dom";
 import { useLogicState } from "../../context/LogicStateContext";
 
 import Button from "../../components/Button/Button";
+import { useTranslation } from "react-i18next";
+import { generatePDF } from "../../utils/generatePDF";
+import { useContextData } from "../../hooks/useContextData";
 
 function StepsNavigation() {
-  const { isStartAccident, setIsStartAccident } = useLogicState();
+  const { isStartAccident, setIsStartAccident, isDriverSignature } =
+    useLogicState();
 
-  //Set state that accident started to true (it needs to deny access to steps and form without choosing a driver and a vehicle)
+  const data = useContextData();
+
   const navigate = useNavigate();
+  const { t } = useTranslation();
+
   useEffect(
     function () {
       setIsStartAccident(true);
@@ -23,20 +30,28 @@ function StepsNavigation() {
           <>
             <li>
               <Link to="steps" className="link-cta navigate">
-                Immediate Steps
+                {t("stepsNavigation.immediateSteps")}
               </Link>
             </li>
             <li>
               <Link to="form" className="link-cta navigate">
-                Form
+                {t("stepsNavigation.form")}
               </Link>
             </li>
           </>
         )}
       </ul>
       <div className="btn-container">
-        <Button onClick={() => navigate("/", { replace: true })}>Back</Button>
-        <div></div>
+        <Button onClick={() => navigate("/", { replace: true })}>
+          {t("actions.back")}
+        </Button>
+        {isDriverSignature ? (
+          <Button onClick={() => generatePDF(data)}>
+            {t("actions.submit")}
+          </Button>
+        ) : (
+          <div></div>
+        )}
       </div>
     </>
   );

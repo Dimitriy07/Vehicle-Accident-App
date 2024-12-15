@@ -1,19 +1,14 @@
-import SignatureCanvas from "react-signature-canvas";
-
-import styles from "../Form.module.css";
 import { useCanvas } from "../../../context/CanvasContext";
-
-import { generatePDF } from "../../../utils/generatePDF";
-import { useContextData } from "../../../hooks/useContextData";
 import { useEffect } from "react";
 import { useLogicState } from "../../../context/LogicStateContext";
 
+import SignatureCanvas from "react-signature-canvas";
+import styles from "../Form.module.css";
+import { useTranslation } from "react-i18next";
 function FormStepSix() {
   const { signatureRef } = useCanvas();
   const { setIsDriverSignature } = useLogicState();
-
-  const data = useContextData();
-
+  const { t } = useTranslation();
   useEffect(function () {
     setIsDriverSignature(true);
   }, []);
@@ -22,15 +17,9 @@ function FormStepSix() {
     signatureRef.current?.clear();
   }
 
-  // function handleSaveSignature(): void {
-  //   const signatureUrl = signatureRef.current?.toDataURL();
-  //   if (signatureUrl === undefined) return;
-  //   setDriverSignature(signatureUrl);
-  // }
-
   return (
     <div className={`${styles.form}`}>
-      <label>Signature</label>
+      <label>{t("signature.signature")}</label>
       <SignatureCanvas
         ref={signatureRef}
         canvasProps={{
@@ -39,15 +28,7 @@ function FormStepSix() {
         }}
         clearOnResize={false}
       />
-      <button onClick={handleClearSignature}>Clear</button>
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-          generatePDF(data);
-        }}
-      >
-        SUBMIT
-      </button>
+      <button onClick={handleClearSignature}>{t("actions.clear")}</button>
     </div>
   );
 }

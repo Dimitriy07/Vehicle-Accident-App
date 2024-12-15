@@ -1,116 +1,99 @@
 import { useNavigate } from "react-router";
+import { useTranslation } from "react-i18next";
 import Button from "../../components/Button/Button";
 import styles from "./InfoSection.module.css";
 
 const InfoSection = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
+
   return (
     <>
       <div className={styles.infoContainer}>
-        <h1 className={styles.title}>Road Traffic Accident Information</h1>
+        <h1 className={styles.title}>{t("info.title")}</h1>
 
         <section className={styles.section}>
-          <h2 className={styles.heading}>
-            Definition of a Road Traffic Accident
-          </h2>
-          <p>
-            An accident occurs if a mechanically propelled vehicle on a road or
-            public place causes:
-          </p>
+          <h2 className={styles.heading}>{t("info.definition.title")}</h2>
+          <p>{t("info.definition.description")}</p>
           <ul className={styles.list}>
-            <li>Injury to anyone except the driver.</li>
-            <li>
-              Damage to another vehicle, specified animals (horse, cattle, ass,
-              mule, sheep, pig, goat or dog), or property (fixed to, growing in
-              or otherwise forming part of the land on which the road or public
-              place is, or adjacent to it.).
-            </li>
+            <li>{t("info.definition.point1")}</li>
+            <li>{t("info.definition.point2")}</li>
           </ul>
         </section>
 
         <section className={styles.section}>
-          <h2 className={styles.heading}>Immediate Actions</h2>
-          <h3 className={styles.subheading}>Ensure Safety:</h3>
+          <h2 className={styles.heading}>{t("info.actions.title")}</h2>
+          <h3 className={styles.subheading}>
+            {t("info.actions.ensureSafety")}
+          </h3>
           <ul className={styles.list}>
-            <li>Move to a safe location if possible.</li>
-            <li>Turn on hazard lights and vehicle lights at night.</li>
-            <li>Place a warning triangle if safe to do so.</li>
+            <li>{t("info.actions.safety1")}</li>
+            <li>{t("info.actions.safety2")}</li>
+            <li>{t("info.actions.safety3")}</li>
           </ul>
 
-          <h3 className={styles.subheading}>Call Emergency Services:</h3>
+          <h3 className={styles.subheading}>
+            {t("info.actions.callEmergency")}
+          </h3>
           <ul className={styles.list}>
-            <li>Dial 999 for police, fire, or ambulance if needed.</li>
-          </ul>
-        </section>
-
-        <section className={styles.section}>
-          <h2 className={styles.heading}>Statutory Duties</h2>
-          <p>After an accident, drivers must:</p>
-          <ul className={styles.list}>
-            <li>Stop immediately.</li>
-            <li>
-              Exchange Details: Provide name, address, and vehicle registration
-              to other parties.
-            </li>
-            <li>If injury occurs, show a valid insurance certificate.</li>
+            <li>{t("info.actions.call999")}</li>
           </ul>
         </section>
 
         <section className={styles.section}>
-          <h2 className={styles.heading}>When to Report to Police</h2>
+          <h2 className={styles.heading}>{t("info.duties.title")}</h2>
+          <p>{t("info.duties.description")}</p>
           <ul className={styles.list}>
-            <li>
-              Report to the police within 24 hours if you can’t exchange details
-              at the scene.
-            </li>
-            <li>Report as soon as possible; delays can lead to prosecution.</li>
+            <li>{t("info.duties.stop")}</li>
+            <li>{t("info.duties.exchangeDetails")}</li>
+            <li>{t("info.duties.showInsurance")}</li>
           </ul>
         </section>
 
         <section className={styles.section}>
-          <h2 className={styles.heading}>Collect Evidence</h2>
+          <h2 className={styles.heading}>{t("info.reportToPolice.title")}</h2>
+          <ul className={styles.list}>
+            <li>{t("info.reportToPolice.report24Hours")}</li>
+            <li>{t("info.reportToPolice.reportAsap")}</li>
+          </ul>
+        </section>
+
+        <section className={styles.section}>
+          <h2 className={styles.heading}>{t("info.collectEvidence.title")}</h2>
           <ul className={styles.list}>
             <li>
-              Take photos of:
+              {t("info.collectEvidence.takePhotos")}
               <ul className={styles.sublist}>
-                <li>Damage to all vehicles</li>
-                <li>Accident scene, road signs, and skid marks</li>
-                <li>Weather conditions</li>
+                <li>{t("info.collectEvidence.damage")}</li>
+                <li>{t("info.collectEvidence.scene")}</li>
+                <li>{t("info.collectEvidence.weather")}</li>
               </ul>
             </li>
-            <li>Get witness details if possible.</li>
-            <li>Do not admit liability at the scene.</li>
+            <li>{t("info.collectEvidence.getWitness")}</li>
+            <li>{t("info.collectEvidence.noLiability")}</li>
           </ul>
         </section>
 
         <section className={styles.section}>
-          <h2 className={styles.heading}>In-Vehicle Cameras</h2>
-          <p>If using a dashcam, ensure footage is:</p>
+          <h2 className={styles.heading}>{t("info.dashcam.title")}</h2>
+          <p>{t("info.dashcam.description")}</p>
           <ul className={styles.list}>
-            <li>Clear (even in low light)</li>
-            <li>Shows time, date, and GPS location</li>
-            <li>Save footage immediately to prevent overwriting.</li>
+            <li>{t("info.dashcam.clearFootage")}</li>
+            <li>{t("info.dashcam.showDetails")}</li>
+            <li>{t("info.dashcam.saveFootage")}</li>
           </ul>
         </section>
 
         <section className={styles.section}>
-          <h2 className={styles.heading}>Moving Vehicles</h2>
+          <h2 className={styles.heading}>{t("info.movingVehicles.title")}</h2>
           <ul className={styles.list}>
-            <li>
-              Move vehicles off the road if possible, after taking photos.
-            </li>
-            <li>
-              Check for fluid leaks, brake, and steering issues before
-              continuing to drive.
-            </li>
+            <li>{t("info.movingVehicles.moveVehicles")}</li>
+            <li>{t("info.movingVehicles.checkIssues")}</li>
           </ul>
         </section>
 
         <footer className={styles.footer}>
-          <p>
-            Following these steps ensures compliance with UK law and protects
-            your legal and insurance rights.
-          </p>
+          <p>{t("info.footer")}</p>
         </footer>
       </div>
       <div className="btn-container">
@@ -119,7 +102,7 @@ const InfoSection = () => {
             navigate("/", { replace: true });
           }}
         >
-          Back
+          {t("actions.back")}
         </Button>
         <div></div>
       </div>

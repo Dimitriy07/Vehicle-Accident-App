@@ -1,0 +1,188 @@
+{
+  "commonAnswers": {
+    "yes": "yes",
+    "no": "no"
+  },
+
+  "actions": {
+    "back": "Back",
+    "next": "Next",
+    "submit": "Submit",
+    "clear": "Clear",
+    "done": "Done"
+  },
+
+  "weatherCondition": {
+    "clear": "Clear",
+    "cloudy": "Cloudy",
+    "foggy": "Foggy",
+    "raining": "Raining",
+    "snow": "Snow",
+    "sunny": "Sunny",
+    "wet": "Wet"
+  },
+  "roadCondition": {
+    "good": "Good",
+    "average": "Average",
+    "poor": "Poor"
+  },
+  "mainScreen": {
+    "selectDriver": "Driver:",
+    "selectVehicle": "Vehicles:",
+    "startAccidentForm": "Start Accident Form"
+  },
+  "formInformation": {
+    "additionalDetails": "Injury/Witness/Police Details",
+    "isInjury": "Is Anyone Injured",
+    "injuryDetails": "Details of injury",
+    "isWitness": "Is Any Witness",
+    "witnessName": "Witness Name",
+    "witnessAddress": "Witness Address",
+    "isPolice": "Is Police attanded",
+    "policeName": "Number and Name of the Officer",
+    "policeStation": "Station of Attending Officer",
+    "policeRefN": "Police reference No (if applicable)"
+  },
+  "incidentDetails": {
+    "sectionTitle": "Incident Details",
+    "accidentDate": "Date",
+    "accidentTime": "Time",
+    "accidentLocation": "Location",
+    "weatherRoadCondition": "Weather and Road Condition",
+    "weatherConditions": "Weather Conditions",
+    "roadConditions": "Road Conditions",
+    "driverSpeed": "Driver's Vehicle Speed (mph)",
+    "tpSpeed": "TP Vehicle Speed (mph)"
+  },
+
+  "damageDescriptions": {
+    "yourVehicle": "Your Vehicle",
+    "tpVehicle": "TP Vehicle",
+    "driverVehDamagePlaceholder": "Your Vehicle Damage Description",
+    "driverDamageDetailsLabel": "Details of damage (Your vehicle)",
+    "tpVehDamagePlaceholder": "TP Vehicle Damage Description",
+    "tpDamageDetailsLabel": "Details of damage (Third party vehicle)"
+  },
+
+  "accidentDiagrams": {
+    "beforeImpact": "Draw Scheme Before Impact",
+    "afterImpact": "Draw Scheme After Impact"
+  },
+  "driverStatement": {
+    "driverStatement": "Driver's Statement(Please explain fully and clearly what happened)"
+  },
+  "signature": {
+    "signature": "Driver's Signature"
+  },
+
+  "immediateSteps": {
+    "photos": "Photos",
+    "tpDetails": "TP Details",
+    "callManager": "Call Manager"
+  },
+
+  "photos": {
+    "photoExplanation1": "Take Photos from all the angles Your and Tp vehicles (at least 16)",
+    "photoExplanation2": "Take Photos through and around the windows of the car to prove whether there were passengers or not",
+    "photoExplanation3": "Take Photos of the streets around you and your surroundings",
+    "photoExamples": "Example of photos to be taken:"
+  },
+
+  "stepsNavigation": {
+    "immediateSteps": "Immediate Steps",
+    "form": "Form"
+  },
+
+  "tpDetails": {
+    "isVehInvolved": "Is Vehicle Involved",
+    "tpVehTitle": "TP Vehicle information",
+    "tpRegNumber": "Reg N",
+    "tpMake": "Make",
+    "tpModel": "Model",
+    "tpDriverOwnerTitle": "TP Driver/Owner information",
+    "isTpDriverOwner": "Is Driver owner of the vehicle",
+    "tpOwnerName": "Owner's Name",
+    "tpOwnerTelephone": "Owner's Telephone",
+    "tpOwnerAddress": "Owner's Address",
+    "tpDriverName": "Driver's Name",
+    "tpDriverTelephone": "Driver's Telephone",
+    "tpDriverAddress": "Driver's Address",
+    "tpInsuranceCompany": "Insurance Company",
+    "tpPolicyNo": "Policy No",
+
+    "tpDetails": "Third Party Details",
+    "tpName": "Full Name",
+    "tpTelephone": "Telephone",
+    "tpAddress": "Address"
+  },
+  "callManager": {
+    "callManager": "Call Manager"
+  },
+  "itemSelection": {
+    "choose": "Choose"
+  },
+  "helperText": {
+    "isDriver": "Choose Driver Name",
+    "isVehicle": "Choose Vehicle Name",
+    "isStartAccidentForm": "Start Accident Form",
+    "isImmediatteSteps": "Go to Immediate Steps",
+    "isPhotos": "Take Photos(as in Photos)",
+    "isTpDetails": "Take TP Details",
+    "isCallManager": "Call Manager",
+    "isPressSubmit": "Press Submit",
+    "isForm": "Go To Form",
+    "isFormProgress": "Form Progress:"
+  },
+  "info": {
+    "title": "Road Traffic Accident Information",
+    "definition": {
+      "title": "Definition of a Road Traffic Accident",
+      "description": "An accident occurs if a mechanically propelled vehicle on a road or public place causes:",
+      "point1": "Injury to anyone except the driver.",
+      "point2": "Damage to another vehicle, specified animals (horse, cattle, ass, mule, sheep, pig, goat or dog), or property."
+    },
+    "actions": {
+      "title": "Immediate Actions",
+      "ensureSafety": "Ensure Safety:",
+      "safety1": "Move to a safe location if possible.",
+      "safety2": "Turn on hazard lights and vehicle lights at night.",
+      "safety3": "Place a warning triangle if safe to do so.",
+      "callEmergency": "Call Emergency Services:",
+      "call999": "Dial 999 for police, fire, or ambulance if needed."
+    },
+    "duties": {
+      "title": "Statutory Duties",
+      "description": "After an accident, drivers must:",
+      "stop": "Stop immediately.",
+      "exchangeDetails": "Exchange Details: Provide name, address, and vehicle registration to other parties.",
+      "showInsurance": "If injury occurs, show a valid insurance certificate."
+    },
+    "reportToPolice": {
+      "title": "When to Report to Police",
+      "report24Hours": "Report to the police within 24 hours if you can’t exchange details at the scene.",
+      "reportAsap": "Report as soon as possible; delays can lead to prosecution."
+    },
+    "collectEvidence": {
+      "title": "Collect Evidence",
+      "takePhotos": "Take photos of:",
+      "damage": "Damage to all vehicles",
+      "scene": "Accident scene, road signs, and skid marks",
+      "weather": "Weather conditions",
+      "getWitness": "Get witness details if possible.",
+      "noLiability": "Do not admit liability at the scene."
+    },
+    "dashcam": {
+      "title": "In-Vehicle Cameras",
+      "description": "If using a dashcam, ensure footage is:",
+      "clearFootage": "Clear (even in low light)",
+      "showDetails": "Shows time, date, and GPS location",
+      "saveFootage": "Save footage immediately to prevent overwriting."
+    },
+    "movingVehicles": {
+      "title": "Moving Vehicles",
+      "moveVehicles": "Move vehicles off the road if possible, after taking photos.",
+      "checkIssues": "Check for fluid leaks, brake, and steering issues before continuing to drive."
+    },
+    "footer": "Following these steps ensures compliance with UK law and protects your legal and insurance rights."
+  }
+}

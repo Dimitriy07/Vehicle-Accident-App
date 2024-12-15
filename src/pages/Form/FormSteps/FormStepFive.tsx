@@ -1,10 +1,11 @@
 import { useFormContext } from "../../../context/FormContext";
 import FormInput from "../../../components/FormInput/FormInput";
 import styles from "../Form.module.css";
+import { useTranslation } from "react-i18next";
 
 function FormStepFive() {
   const { driverStatement, setDriverStatement } = useFormContext();
-
+  const { t } = useTranslation();
   return (
     <div className={`${styles.form}`}>
       <div>
@@ -12,8 +13,7 @@ function FormStepFive() {
           type="textarea"
           rows={10}
           cols={50}
-          label=" Driver's Statement(Please explain fully and clearly what
-    happened)"
+          label={t("driverStatement.driverStatement")}
           value={driverStatement}
           onChangeSet={setDriverStatement}
         />

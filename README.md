@@ -31,7 +31,7 @@ This app is built using modern web technologies to ensure a robust, responsive, 
 planned for future use:
 
 - **GraphQL**: Enables efficient data fetching and communication between the frontend and backend (coming soon).
-- **Node.js** & **MongoDB** (backend technologies to be integrated later for data management and API interaction).
+- **Node.js** & **MongoDB** (backend technologies to be integrated later for data management and API interaction) (coming soon).
 
 ## 🚀 How it makes life easier?
 
@@ -49,7 +49,7 @@ If you'd like to run this app locally:
    git clone https://github.com/yourusername/accident-form-submission-app.git
    ```
 2. Navigate to the project directory:
-   cd accident-form-submission-app
+   cd Vehicle-Accident-App
 3. Install dependencies:
    npm install
 4. Start the development server:
